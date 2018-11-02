@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、scala概述1.1 什么是scala1scala具有面向对象编程和函数式编程风格的多范式编程语言，它是运行在JVM平台，兼容javaAPI 1.2 为什么要学习scala 1、代码优雅 2、开发速度快 3、可以融合到hadoop的生态圈  2、scala环境安装2.1 基于window2.2 基于linux3、scala的开发工具安装 1、基于IDEA按照对应的scala插件 1、在线安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/02/Scala学习笔记/index.html">
+<meta property="og:site_name" content="花驴">
+<meta property="og:description" content="1、scala概述1.1 什么是scala1scala具有面向对象编程和函数式编程风格的多范式编程语言，它是运行在JVM平台，兼容javaAPI 1.2 为什么要学习scala 1、代码优雅 2、开发速度快 3、可以融合到hadoop的生态圈  2、scala环境安装2.1 基于window2.2 基于linux3、scala的开发工具安装 1、基于IDEA按照对应的scala插件 1、在线安装">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="d:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97">
+<meta property="og:updated_time" content="2018-11-02T06:08:42.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala学习笔记">
+<meta name="twitter:description" content="1、scala概述1.1 什么是scala1scala具有面向对象编程和函数式编程风格的多范式编程语言，它是运行在JVM平台，兼容javaAPI 1.2 为什么要学习scala 1、代码优雅 2、开发速度快 3、可以融合到hadoop的生态圈  2、scala环境安装2.1 基于window2.2 基于linux3、scala的开发工具安装 1、基于IDEA按照对应的scala插件 1、在线安装">
+<meta name="twitter:image" content="d:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/02/Scala学习笔记/">
+
+
+
+
+
+  <title>Scala学习笔记 | 花驴</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花驴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生如此,拿酒来...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/Scala学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花驴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scala学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T14:08:42+08:00">
+                2018-11-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-02T14:08:42+08:00">
+                2018-11-02
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1、scala概述"><a href="#1、scala概述" class="headerlink" title="1、scala概述"></a>1、scala概述</h4><h5 id="1-1-什么是scala"><a href="#1-1-什么是scala" class="headerlink" title="1.1 什么是scala"></a>1.1 什么是scala</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scala具有面向对象编程和函数式编程风格的多范式编程语言，它是运行在JVM平台，兼容javaAPI</span><br></pre></td></tr></table></figure>
+<h5 id="1-2-为什么要学习scala"><a href="#1-2-为什么要学习scala" class="headerlink" title="1.2 为什么要学习scala"></a>1.2 为什么要学习scala</h5><ul>
+<li>1、代码优雅</li>
+<li>2、开发速度快</li>
+<li>3、可以融合到hadoop的生态圈</li>
+</ul>
+<h4 id="2、scala环境安装"><a href="#2、scala环境安装" class="headerlink" title="2、scala环境安装"></a>2、scala环境安装</h4><h5 id="2-1-基于window"><a href="#2-1-基于window" class="headerlink" title="2.1 基于window"></a>2.1 基于window</h5><h5 id="2-2-基于linux"><a href="#2-2-基于linux" class="headerlink" title="2.2 基于linux"></a>2.2 基于linux</h5><h4 id="3、scala的开发工具安装"><a href="#3、scala的开发工具安装" class="headerlink" title="3、scala的开发工具安装"></a>3、scala的开发工具安装</h4><ul>
+<li>1、基于IDEA按照对应的scala插件<ul>
+<li>1、在线安装<ul>
+<li>需要本机有网络</li>
+</ul>
+</li>
+<li>2、离线安装<ul>
+<li>需要事先下载好对应的scala插件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、scala基础语法"><a href="#4、scala基础语法" class="headerlink" title="4、scala基础语法"></a>4、scala基础语法</h4><h5 id="4-1-声明变量"><a href="#4-1-声明变量" class="headerlink" title="4.1 声明变量"></a>4.1 声明变量</h5><ul>
+<li><p>1、val</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val a=1</span><br><span class="line">val b=2</span><br><span class="line">使用val修饰的变量相当于java用final修饰的变量，它是不可以改变。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、var</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var c=1</span><br><span class="line">var d=2</span><br><span class="line">使用var修饰的变量是可以改变，可以改变就意味着可以重新赋值。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>scala中在声明变量的时候，可以不给出变量的类型，可以通过scala编译器自动帮我们进行类型推断。</p>
+</li>
+<li><p>也可以具体给出变量的类型</p>
+<ul>
+<li>val e:String=”itcast”</li>
+<li>这里是变量名在前，类型在后，跟java正好相反。</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-2-常用的类型"><a href="#4-2-常用的类型" class="headerlink" title="4.2 常用的类型"></a>4.2 常用的类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Scala和Java一样，有7种数值类型Byte、Char、Short、Int、Long、Float、Double类型和1个Boolean类型。</span><br></pre></td></tr></table></figure>
+<h5 id="4-3-条件表达式"><a href="#4-3-条件表达式" class="headerlink" title="4.3 条件表达式"></a>4.3 条件表达式</h5><ul>
+<li><p>就是我们在声明一个变量的时候，通过写一些if else逻辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">val a=1</span><br><span class="line">val b=if(a&lt;0) -1 else 1</span><br><span class="line">val b=if(a&lt;0) -1</span><br><span class="line">val b=if(a&lt;0) -1 else if(a==0) 0 else 1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="4-4-块表达式"><a href="#4-4-块表达式" class="headerlink" title="4.4 块表达式"></a>4.4 块表达式</h5><ul>
+<li>就是我们在声明一个变量的时候，后面跟上{}，大括号中有很多个表达式，其中<strong>最后一个表达式的值</strong>就是块的值。</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> a=<span class="number">1</span></span><br><span class="line"><span class="keyword">val</span> result=&#123;</span><br><span class="line">      <span class="keyword">val</span> b=a+<span class="number">1</span></span><br><span class="line">      <span class="keyword">val</span> c=b+<span class="number">1</span></span><br><span class="line">      <span class="keyword">val</span> d=c+<span class="number">1</span></span><br><span class="line">      d</span><br><span class="line">      &#125;</span><br><span class="line"><span class="comment">// 后期对应scala中需要返回值的方法来说，就不需要在最后加上return，直接把你需要返回的结果放在方法代</span></span><br><span class="line"><span class="comment">// 码中最后一行就可以了</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-5-循环"><a href="#4-5-循环" class="headerlink" title="4.5  循环"></a>4.5  循环</h5><ul>
+<li><p>java中有for while循环，scala中也有</p>
+</li>
+<li><p>scala中for循环</p>
+<ul>
+<li><p>for(变量 &lt;- 集合/数组/表达式)</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">1</span> to <span class="number">10</span>) println(i)</span><br><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">1</span> to <span class="number">3</span>; j &lt;- <span class="number">1</span> to <span class="number">3</span> <span class="keyword">if</span> i!=j) println(i+j)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">1</span> to <span class="number">9</span>;j &lt;- <span class="number">1</span> to i)&#123;</span><br><span class="line">     print(i+<span class="string">"*"</span>+j+<span class="string">"="</span>+i*j+<span class="string">"\t"</span>)</span><br><span class="line">      <span class="keyword">if</span>(i==j)&#123;</span><br><span class="line">      println()</span><br><span class="line">      &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">1</span> to <span class="number">10</span>) <span class="keyword">yield</span> i*<span class="number">10</span>  </span><br><span class="line"><span class="comment">// for循环以yield开始，它是for循环的推导式，它会帮我们生成一个新的集合</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>scala中while循环</p>
+<ul>
+<li>while(boolean类型的表达式)</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-6-定义方法和函数"><a href="#4-6-定义方法和函数" class="headerlink" title="4.6 定义方法和函数"></a>4.6 定义方法和函数</h5><ul>
+<li><p>1、定义方法</p>
+<ul>
+<li><p>def m1(x:Int,y:Int):Int=x+y</p>
+<p><img src="D:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97" alt="">/5%E3%80%81scala%E8%AF%BE%E7%A8%8B%E8%B5%84%E6%96%99/scala_day01/method.png)</p>
+</li>
+<li><p>调用方法m1(1,2)</p>
+</li>
+<li><p>声明一个方法的时候，返回值类型可以省略不写，但是递归必须要手动指定返回值类型</p>
+</li>
+</ul>
+</li>
+<li><p>2、定义函数</p>
+<ul>
+<li>val f1=(x:Int,y:Int) =&gt; x+y</li>
+<li>f1(1,2)</li>
+</ul>
+</li>
+<li><p>3、方法和函数区别</p>
+<ul>
+<li>函数</li>
+<li>函数在scala中它是一个对象，具有该对象中的一些方法</li>
+<li>当前这个函数有N个输入参数，该函数就继承自FunctionN类</li>
+<li>方法<ul>
+<li>方法就是对象中的方法，它是不具备函数这种特性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>4、方法转换成函数</p>
+<ul>
+<li>使用方法名+下划线转换成函数<ul>
+<li>val f1=m1 _</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、scala中的数组"><a href="#5、scala中的数组" class="headerlink" title="5、scala中的数组"></a>5、scala中的数组</h4><h5 id="5-1-声明数组"><a href="#5-1-声明数组" class="headerlink" title="5.1 声明数组"></a>5.1 声明数组</h5><ul>
+<li><p>1、定义定长的数组</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array=<span class="keyword">new</span> <span class="type">Array</span>[<span class="type">Int</span>](<span class="number">5</span>)</span><br><span class="line"><span class="keyword">val</span> array=<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、定义变长的数组</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.mutable.<span class="type">ArrayBuffer</span></span><br><span class="line"><span class="keyword">val</span> array1=<span class="type">ArrayBuffer</span>[<span class="type">Int</span>]()</span><br><span class="line"><span class="keyword">val</span> array2=<span class="type">ArrayBuffer</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3、操作数组</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array=<span class="type">ArrayBuffer</span>[<span class="type">Int</span>]()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1、添加元素</span></span><br><span class="line">  array +=<span class="number">1</span></span><br><span class="line">  array +=(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">  array ++=<span class="type">Array</span>(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line">  array ++=<span class="type">ArrayBuffer</span>(<span class="number">7</span>,<span class="number">8</span>)</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 2、获取元素</span></span><br><span class="line"> array(下标)</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 3、修改元素</span></span><br><span class="line"> array(下标)=值</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 4、删除元素</span></span><br><span class="line">  array -=<span class="number">100</span></span><br><span class="line">  array -=(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">  array --=<span class="type">Array</span>(<span class="number">5</span>,<span class="number">6</span>)</span><br><span class="line">  array --=<span class="type">ArrayBuffer</span>(<span class="number">7</span>,<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="5-2-遍历数组"><a href="#5-2-遍历数组" class="headerlink" title="5.2 遍历数组"></a>5.2 遍历数组</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）直接使用for循环获取每一个元素</span></span><br><span class="line"><span class="keyword">for</span>(i &lt;- array) println(i)</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）until: 可以对数组操作之后，生成下标  0 until 5 ----&gt; Range(0, 1, 2, 3, 4)</span></span><br><span class="line"><span class="keyword">for</span>(i &lt;- <span class="number">0</span> until array.length) println(array(i))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i &lt;- (<span class="number">0</span> until array.length).reverse ) println(array(i))</span><br><span class="line"><span class="comment">// reverse反转</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-3-数组的转换"><a href="#5-3-数组的转换" class="headerlink" title="5.3 数组的转换"></a>5.3 数组的转换</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> array=<span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment">// 实现数组中偶数取出来，然后乘以10 最后得到一个新的数组</span></span><br><span class="line"><span class="keyword">for</span>(i &lt;- array <span class="keyword">if</span> i%<span class="number">2</span>==<span class="number">0</span>) <span class="keyword">yield</span> i*<span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> f1=(x:<span class="type">Int</span>)=&gt;x%<span class="number">2</span>==<span class="number">0</span></span><br><span class="line">array.filter(f1)</span><br><span class="line">array.filter((x:<span class="type">Int</span>)=&gt;x%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">array.filter( x =&gt;x%<span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line">array.filter( _ % <span class="number">2</span>==<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> f2=(x:<span class="type">Int</span>)=&gt;x*<span class="number">10</span></span><br><span class="line">array.filter( _ % <span class="number">2</span>==<span class="number">0</span>).map(f2)</span><br><span class="line">array.filter( _ % <span class="number">2</span>==<span class="number">0</span>).map((x:<span class="type">Int</span>)=&gt;x*<span class="number">10</span>)</span><br><span class="line">array.filter( _ % <span class="number">2</span>==<span class="number">0</span>).map(x=&gt;x*<span class="number">10</span>)</span><br><span class="line">array.filter(_ %<span class="number">2</span>== <span class="number">0</span>).map(_ * <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 这里的下划线表示前面数组中的每一个元素。</span></span><br></pre></td></tr></table></figure>
+<h4 id="6、映射"><a href="#6、映射" class="headerlink" title="6、映射"></a>6、映射</h4><ul>
+<li><p>就是一个map集合</p>
+</li>
+<li><p>定义不可变的map集合</p>
+<ul>
+<li><p>val map=Map(“键” -&gt; “值” ,”键” -&gt; “值”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val map=Map(&quot;zhangsan&quot; -&gt; 30,&quot;lisi&quot; -&gt; 40)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>val map=Map((“键”,”值”)，(“键”,”值”))</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val map1=Map((&quot;zhangsan&quot;,30),(&quot;lisi&quot;,40))</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>获取value</p>
+<ul>
+<li>值=map(键)</li>
+<li>map.getOrElse(键，默认值)<ul>
+<li>如果key存在就获取真实的值，如果不存在就给一个默认值，避免在不确定map中是否存在这个key的情况下报错</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>定义可变的map集合</p>
+<ul>
+<li><p>import scala.collection.mutable.HashMap</p>
+</li>
+<li><p>val hmap=HashMap(“zhangsan” -&gt; 30,”lisi” -&gt; 40)</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、获取map中值</span><br><span class="line">  值=map(键)</span><br><span class="line">  map.getOrElse(键，默认值)</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、添加键值</span><br><span class="line">hmap +=(<span class="string">"lisi"</span> -&gt; <span class="number">60</span>,<span class="string">"wangwu"</span> -&gt;<span class="number">40</span>)</span><br><span class="line">hmap.put(<span class="string">"zhaoliu"</span>,<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、修改</span><br><span class="line">hmap(<span class="string">"lisi"</span>)=<span class="number">70</span></span><br><span class="line">hmap +=(<span class="string">"lisi"</span> -&gt; <span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、删除</span><br><span class="line">hmap -=(<span class="string">"lisi"</span>)</span><br><span class="line">hmap.remove(<span class="string">"wangwu"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="7、元组"><a href="#7、元组" class="headerlink" title="7、元组"></a>7、元组</h4><ul>
+<li>1、元组就是把不同类型的值通过小括号聚在一起就组成一个元组</li>
+<li>2、定义元组<ul>
+<li>val t=(100,3.14,”itcast”)</li>
+</ul>
+</li>
+<li>3、获取元组中的元素<ul>
+<li>t._1</li>
+<li>t._2</li>
+<li>t._3</li>
+<li>注意：从1开始，不是从0开始</li>
+</ul>
+</li>
+</ul>
+<h4 id="8、List"><a href="#8、List" class="headerlink" title="8、List"></a>8、List</h4><ul>
+<li><p>1、不可变的list（immutable）</p>
+<ul>
+<li>val list=List(1,2,3,4)</li>
+</ul>
+</li>
+<li><p>2、可变的list（mutable）</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.mutable.<span class="type">ListBuffer</span></span><br><span class="line"><span class="keyword">val</span> list=<span class="type">ListBuffer</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">list +=<span class="number">2</span></span><br><span class="line">list.append(<span class="number">3</span>)</span><br><span class="line">list ++=<span class="type">List</span>(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">list ++=<span class="type">ListBuffer</span>(<span class="number">6</span>,<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除元素</span></span><br><span class="line">list -=<span class="number">2</span></span><br><span class="line">list.remove(<span class="number">0</span>) </span><br><span class="line">list --=<span class="type">List</span>(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">list --=<span class="type">ListBuffer</span>(<span class="number">6</span>,<span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="9、Set"><a href="#9、Set" class="headerlink" title="9、Set"></a>9、Set</h4><ul>
+<li><p>1、不可变的set集合（immutable）</p>
+<ul>
+<li>val set=Set(1,2,3,4)</li>
+</ul>
+</li>
+<li><p>2、可变的set集合（mutable）</p>
+<ul>
+<li><p>import scala.collection.mutable.HashSet</p>
+</li>
+<li><p>val hset=HashSet(1,2,3)</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">hset +=<span class="number">4</span></span><br><span class="line">hset.add(<span class="number">5</span>)</span><br><span class="line">hset++=<span class="type">Set</span>(<span class="number">6</span>,<span class="number">7</span>)</span><br><span class="line">hset++=<span class="type">HashSet</span>(<span class="number">8</span>,<span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除元素</span></span><br><span class="line">hset -=<span class="number">4</span></span><br><span class="line">hset.remove(<span class="number">5</span>)</span><br><span class="line">hset--=<span class="type">Set</span>(<span class="number">6</span>,<span class="number">7</span>)</span><br><span class="line">hset--=<span class="type">HashSet</span>(<span class="number">8</span>,<span class="number">9</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/02/模板/" rel="next" title="Just a Template">
+                <i class="fa fa-chevron-left"></i> Just a Template
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Long</p>
+              <p class="site-description motion-element" itemprop="description">大数据</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、scala概述"><span class="nav-number">1.</span> <span class="nav-text">1、scala概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-什么是scala"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是scala</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-为什么要学习scala"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 为什么要学习scala</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、scala环境安装"><span class="nav-number">2.</span> <span class="nav-text">2、scala环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-基于window"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 基于window</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-基于linux"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 基于linux</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、scala的开发工具安装"><span class="nav-number">3.</span> <span class="nav-text">3、scala的开发工具安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、scala基础语法"><span class="nav-number">4.</span> <span class="nav-text">4、scala基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-声明变量"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 声明变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-常用的类型"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 常用的类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-条件表达式"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 条件表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-块表达式"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 块表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-循环"><span class="nav-number">4.5.</span> <span class="nav-text">4.5  循环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-定义方法和函数"><span class="nav-number">4.6.</span> <span class="nav-text">4.6 定义方法和函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、scala中的数组"><span class="nav-number">5.</span> <span class="nav-text">5、scala中的数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-声明数组"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 声明数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-遍历数组"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 遍历数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-数组的转换"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 数组的转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、映射"><span class="nav-number">6.</span> <span class="nav-text">6、映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、元组"><span class="nav-number">7.</span> <span class="nav-text">7、元组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、List"><span class="nav-number">8.</span> <span class="nav-text">8、List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、Set"><span class="nav-number">9.</span> <span class="nav-text">9、Set</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Long</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
