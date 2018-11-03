@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Scala,编程语言,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 高阶函数1.1 概念Scala混合了面向对象和函数式的特性，我们通常将可以作为参数传递到方法中的表达式叫做函数。在函数式编程语言中，函数是“头等公民”，高阶函数包含：作为值的函数、匿名函数、闭包、柯里化等等。 1.1.1 作为值的函数 可以像任何其他数据类型一样被传递和操作的函数，每当你想要给算法传入具体动作时这个特性就会变得非常有用。  定义函数时格式：val 变量名 = (输入参数类型和">
+<meta name="keywords" content="Scala,编程语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scala高级特性">
+<meta property="og:url" content="http://yoursite.com/2018/11/03/2018-11-03-Scala高级特性/index.html">
+<meta property="og:site_name" content="花驴">
+<meta property="og:description" content="1. 高阶函数1.1 概念Scala混合了面向对象和函数式的特性，我们通常将可以作为参数传递到方法中的表达式叫做函数。在函数式编程语言中，函数是“头等公民”，高阶函数包含：作为值的函数、匿名函数、闭包、柯里化等等。 1.1.1 作为值的函数 可以像任何其他数据类型一样被传递和操作的函数，每当你想要给算法传入具体动作时这个特性就会变得非常有用。  定义函数时格式：val 变量名 = (输入参数类型和">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-03T01:12:20.880Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scala高级特性">
+<meta name="twitter:description" content="1. 高阶函数1.1 概念Scala混合了面向对象和函数式的特性，我们通常将可以作为参数传递到方法中的表达式叫做函数。在函数式编程语言中，函数是“头等公民”，高阶函数包含：作为值的函数、匿名函数、闭包、柯里化等等。 1.1.1 作为值的函数 可以像任何其他数据类型一样被传递和操作的函数，每当你想要给算法传入具体动作时这个特性就会变得非常有用。  定义函数时格式：val 变量名 = (输入参数类型和">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/03/2018-11-03-Scala高级特性/">
+
+
+
+
+
+  <title>Scala高级特性 | 花驴</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花驴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生如此,拿酒来...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/03/2018-11-03-Scala高级特性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hualvl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花驴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scala高级特性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T09:10:09+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-03T09:12:20+08:00">
+                2018-11-03
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-高阶函数"><a href="#1-高阶函数" class="headerlink" title="1. 高阶函数"></a>1. 高阶函数</h2><h3 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h3><p>Scala混合了面向对象和函数式的特性，我们通常将可以作为参数传递到方法中的表达式叫做函数。在函数式编程语言中，函数是“头等公民”，高阶函数包含：作为值的函数、匿名函数、闭包、柯里化等等。</p>
+<h3 id="1-1-1-作为值的函数"><a href="#1-1-1-作为值的函数" class="headerlink" title="1.1.1 作为值的函数"></a>1.1.1 作为值的函数</h3><ul>
+<li><p>可以像任何其他数据类型一样被传递和操作的函数，每当你想要给算法传入具体动作时这个特性就会变得非常有用。</p>
+</li>
+<li><p>定义函数时格式：val 变量名 = (输入参数类型和个数) => 函数实现和返回值类型</p>
+</li>
+<li><p>“=”表示将函数赋给一个变量</p>
+</li>
+<li><p>“=>”左面表示输入参数名称、类型和个数，右边表示函数的实现和返回值类型</p>
+</li>
+</ul>
+<h3 id="1-1-2-匿名函数"><a href="#1-1-2-匿名函数" class="headerlink" title="1.1.2 匿名函数"></a>1.1.2 匿名函数</h3><ul>
+<li><p>在Scala中，你不需要给每一个函数命名，没有将函数赋给变量的函数叫做匿名函数。</p>
+</li>
+<li><p>由于Scala可以自动推断出参数的类型，所有可以写的跟精简一些</p>
+</li>
+<li><p>还记得神奇的下划线吗？这才是终极方式</p>
+</li>
+</ul>
+<h3 id="1-1-3-柯里化"><a href="#1-1-3-柯里化" class="headerlink" title="1.1.3 柯里化"></a>1.1.3 柯里化</h3><ul>
+<li>什么是柯里化?</li>
+</ul>
+<p>柯里化(Currying)指的是把原来接受多个参数的函数变换成接受一个参数的函数过程，并且返回接受余下的参数且返回结果为一个新函数的技术。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><ol>
+<li>一个普通的非柯里化的函数定义，实现一个加法函数：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">| scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">plainOldSum</span></span>(x:<span class="type">Int</span>,y:<span class="type">Int</span>)=x+y</span><br><span class="line">| plainOldSum: (x: <span class="type">Int</span>, y: <span class="type">Int</span>)<span class="type">Int</span> scala&gt; plainOldSum(<span class="number">1</span>,<span class="number">2</span>) res0: <span class="type">Int</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用“柯里化”技术来定义这个加法函数，原来函数使用一个参数列表，“柯里化”，把函数定义为多个参数列表：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">curriedSum</span></span>(x:<span class="type">Int</span>)(y:<span class="type">Int</span>)=x+y</span><br><span class="line">| curriedSum: (x: <span class="type">Int</span>)(y: <span class="type">Int</span>)<span class="type">Int</span> </span><br><span class="line">| scala&gt; curriedSum(<span class="number">1</span>)(<span class="number">2</span>) res1: <span class="type">Int</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p> 当你调用curriedSum (1)(2)时，实际上是依次调用两个普通函数（非柯里化函数）， 第一次调用使用一个参数x，返回一个函数类型的值， 第二次使用参数y调用这个函数类型的值。</p>
+<ol>
+<li>使用下面两个分开的定义在模拟curriedSum柯里化函数：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> 首先定义第一个函数： </span><br><span class="line">| scala&gt; <span class="function"><span class="keyword">def</span> <span class="title">first</span></span>(x:<span class="type">Int</span>)=(y:<span class="type">Int</span>)=&gt;x+y </span><br><span class="line">| first: (x: <span class="type">Int</span>)<span class="type">Int</span> =&gt; <span class="type">Int</span> </span><br><span class="line"> 然后我们使用参数<span class="number">1</span>调用这个函数来生成第二个函数：</span><br><span class="line">| scala&gt; <span class="keyword">val</span> second =first(<span class="number">1</span>) second: <span class="type">Int</span> =&gt; <span class="type">Int</span> = &lt;function1&gt; scala&gt; second(<span class="number">2</span>) </span><br><span class="line">| res2: <span class="type">Int</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用curriedSum 来定义second</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| scala&gt; <span class="keyword">val</span> onePlus=curriedSum(<span class="number">1</span>)_ onePlus:</span><br><span class="line">| <span class="type">Int</span> =&gt; <span class="type">Int</span> = &lt;function1&gt; </span><br><span class="line">下划线“_” 作为第二参数列表的占位符， 这个定义的返回值为一个函数，当调用时会给调用的参数加一。</span><br><span class="line">| scala&gt; onePlus(<span class="number">2</span>) res3: <span class="type">Int</span> = <span class="number">3</span> </span><br><span class="line">调用生成的函数，给函数传入参数，即可得到我们想要的结果。</span><br></pre></td></tr></table></figure>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>scala柯里化风格的使用可以简化主函数的复杂度，提高主函数的自闭性，提高功能上的可扩张性、灵活性。可以编写出更加抽象,功能化和高效的函数式代码。</p>
+<h2 id="2-闭包"><a href="#2-闭包" class="headerlink" title="2. 闭包"></a>2. 闭包</h2><h3 id="2-1-什么是闭包"><a href="#2-1-什么是闭包" class="headerlink" title="2.1 什么是闭包"></a>2.1 什么是闭包</h3><ul>
+<li>闭包是一个函数，返回值依赖于声明在函数外部的一个或多个变量。<br>闭包通常来讲可以简单的认为是可以访问不在当前作用域范围内的一个函数。</li>
+</ul>
+<h3 id="2-2-例子"><a href="#2-2-例子" class="headerlink" title="2.2 例子"></a>2.2 例子</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.closure  </span><br><span class="line"><span class="comment">/**  </span></span><br><span class="line"><span class="comment">* scala中的闭包  </span></span><br><span class="line"><span class="comment">* 闭包是一个函数，返回值依赖于声明在函数外部的一个或多个变量。  </span></span><br><span class="line"><span class="comment">*/</span>  </span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">ClosureDemo</span> </span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;  </span><br><span class="line"><span class="keyword">val</span> y=<span class="number">10</span>  </span><br><span class="line"><span class="comment">// 变量y不处于其有效作用域时,函数还能够对变量进行访问</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> add=(x:<span class="type">Int</span>)=&gt;&#123;  </span><br><span class="line">x+y  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 在add中有两个变量：x和y。其中的一个x是函数的形式参数，  </span></span><br><span class="line"><span class="comment">// 在add方法被调用时，x被赋予一个新的值。  </span></span><br><span class="line"><span class="comment">// 然而，y不是形式参数，而是自由变量  </span></span><br><span class="line">println(add(<span class="number">5</span>)) <span class="comment">// 结果15  </span></span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-隐式转换和隐式参数"><a href="#3-隐式转换和隐式参数" class="headerlink" title="3.隐式转换和隐式参数"></a>3.隐式转换和隐式参数</h2><h3 id="3-1-隐式转换"><a href="#3-1-隐式转换" class="headerlink" title="3.1 隐式转换"></a>3.1 隐式转换</h3><ul>
+<li><p>Scala提供的隐式转换和隐式参数功能，是非常有特色的功能。是Java等编程语言所没有的功能。它可以允许你手动指定，将某种类型的对象转换成其他类型的对象或者是给一个类增加方法。通过这些功能，可以实现非常强大、特殊的功能。</p>
+</li>
+<li><p>Scala的隐式转换，其实最核心的就是定义隐式转换方法，即implicit conversion<br>function。定义的隐式转换方法，只要在编写的程序内引入，就会被Scala自动使用。Scala会根据隐式转换方法的签名，在程序中使用到隐式转换方法接收的参数类型定义的对象时，会自动将其传入隐式转换方法，转换为另外一种类型的对象并返回。这就是“隐式转换”。其中所有的隐式值和隐式方法必须放到object中。</p>
+</li>
+<li><p>然而使用Scala的隐式转换是有一定的限制的，总结如下：</p>
+<ul>
+<li>implicit关键字只能用来修饰方法、变量（参数)。</li>
+<li>隐式转换的方法在当前范围内才有效。如果隐式转换不在当前范围内定义（比如定义在另一个类中或包含在某个对象中），那么必须通过import语句将其导。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-隐式参数"><a href="#3-2-隐式参数" class="headerlink" title="3.2 隐式参数"></a>3.2 隐式参数</h3><ul>
+<li>所谓的隐式参数，指的是在函数或者方法中，定义一个用implicit修饰的参数，此时Scala会尝试找到一个指定类型的，用implicit修饰的参数，即隐式值，并注入参数。</li>
+</ul>
+<p>Scala会在两个范围内查找:</p>
+<ul>
+<li><p>​                当前作用域内可见的val或var定义的隐式变量；</p>
+</li>
+<li><p>一种是隐式参数类型的伴生对象内的隐式值；</p>
+</li>
+</ul>
+<h3 id="3-3-隐式转换方法作用域与导入"><a href="#3-3-隐式转换方法作用域与导入" class="headerlink" title="3.3 隐式转换方法作用域与导入"></a>3.3 隐式转换方法作用域与导入</h3><p>（1）Scala默认会使用两种隐式转换，一种是源类型或者目标类型的伴生对象内的隐式转换方法；一种是当前程序作用域内的可以用唯一标识符表示的隐式转换方法。</p>
+<p>（2）如果隐式转换方法不在上述两种情况下的话，那么就必须手动使用import语法引入某个包下的隐式转换方法，比如import test._。通常建议，仅仅在需要进行隐式转换的地方，用import导入隐式转换方法，这样可以缩小隐式转换方法的作用域，避免不需要的隐式转换。</p>
+<h3 id="3-4-隐式转换的时机"><a href="#3-4-隐式转换的时机" class="headerlink" title="3.4 隐式转换的时机"></a>3.4 隐式转换的时机</h3><p>（1）当对象调用类中不存在的方法或成员时，编译器会自动将对象进行隐式转换</p>
+<p>（2）当方法中的参数的类型与目标类型不一致时 </p>
+<h3 id="3-5-隐式转换和隐式参数案例"><a href="#3-5-隐式转换和隐式参数案例" class="headerlink" title="3.5 隐式转换和隐式参数案例"></a>3.5 隐式转换和隐式参数案例</h3><h4 id="3-5-1-隐式转换案例一（让File类具备RichFile类中的read方法）"><a href="#3-5-1-隐式转换案例一（让File类具备RichFile类中的read方法）" class="headerlink" title="3.5.1 隐式转换案例一（让File类具备RichFile类中的read方法）"></a>3.5.1 隐式转换案例一（让File类具备RichFile类中的read方法）</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.implic_demo</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.<span class="type">File</span>  </span><br><span class="line"><span class="keyword">import</span> scala.io.<span class="type">Source</span>  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">MyPredef</span></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义隐式转换方法  </span></span><br><span class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">file2RichFile</span></span>(file: <span class="type">File</span>)=<span class="keyword">new</span> <span class="type">RichFile</span>(file)  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RichFile</span>(<span class="params">val f:<span class="type">File</span></span>) </span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read</span></span>()=<span class="type">Source</span>.fromFile(f).mkString  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">RichFile</span></span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;  </span><br><span class="line"><span class="keyword">val</span> f=<span class="keyword">new</span> <span class="type">File</span>(<span class="string">"E://words.txt"</span>)  </span><br><span class="line"><span class="comment">// 使用import导入隐式转换方法  </span></span><br><span class="line"><span class="keyword">import</span> <span class="type">MyPredef</span>._</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过隐式转换，让File类具备了RichFile类中的方法  </span></span><br><span class="line"><span class="keyword">val</span> content=f.read()  </span><br><span class="line">println(content)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-2-隐式转换案例二（超人变身）"><a href="#3-5-2-隐式转换案例二（超人变身）" class="headerlink" title="3.5.2 隐式转换案例二（超人变身）"></a>3.5.2 隐式转换案例二（超人变身）</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.implic_demo</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Man</span>(<span class="params">val name:<span class="type">String</span></span>)  </span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SuperMan</span>(<span class="params">val name: <span class="type">String</span></span>) </span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heat=print</span></span>(<span class="string">"超人打怪兽"</span>)  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">SuperMan</span></span>&#123;  </span><br><span class="line"><span class="comment">// 隐式转换方法  </span></span><br><span class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">man2SuperMan</span></span>(man:<span class="type">Man</span>)=<span class="keyword">new</span> <span class="type">SuperMan</span>(man.name)  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;  </span><br><span class="line"><span class="keyword">val</span> hero=<span class="keyword">new</span> <span class="type">Man</span>(<span class="string">"hero"</span>)  </span><br><span class="line"><span class="comment">// Man具备了SuperMan的方法  </span></span><br><span class="line">hero.heat  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-3-隐式转换案例三（一个类隐式转换成具有相同方法的多个类）"><a href="#3-5-3-隐式转换案例三（一个类隐式转换成具有相同方法的多个类）" class="headerlink" title="3.5.3 隐式转换案例三（一个类隐式转换成具有相同方法的多个类）"></a>3.5.3 隐式转换案例三（一个类隐式转换成具有相同方法的多个类）</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.implic_demo  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">c:<span class="type">C</span></span>) </span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readBook</span></span>(): <span class="type">Unit</span> =&#123;  </span><br><span class="line">println(<span class="string">"A说：花驴好帅..."</span>)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">c:<span class="type">C</span></span>)</span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readBook</span></span>(): <span class="type">Unit</span> =&#123;  </span><br><span class="line">println(<span class="string">"B说：真的吗?..."</span>)  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeBook</span></span>(): <span class="type">Unit</span> =&#123;  </span><br><span class="line">println(<span class="string">"B说：他吃藕..."</span>)  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>  </span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">AB</span></span>&#123;  </span><br><span class="line"><span class="comment">// 创建一个类的2个类的隐式转换  </span></span><br><span class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">C2A</span></span>(c:<span class="type">C</span>)=<span class="keyword">new</span> <span class="type">A</span>(c)  </span><br><span class="line"><span class="keyword">implicit</span> <span class="function"><span class="keyword">def</span> <span class="title">C2B</span></span>(c:<span class="type">C</span>)=<span class="keyword">new</span> <span class="type">B</span>(c)  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">B</span></span>&#123;  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;  </span><br><span class="line"><span class="comment">// 导包  </span></span><br><span class="line"><span class="comment">// 1. import AB._ 会将AB类下的所有隐式转换导进来  </span></span><br><span class="line"><span class="comment">// 2. import AB.C2A 只导入C类到A类的的隐式转换方法  </span></span><br><span class="line"><span class="comment">// 3. import AB.C2B 只导入C类到B类的的隐式转换方法  </span></span><br><span class="line"><span class="keyword">import</span> <span class="type">AB</span>._  </span><br><span class="line"><span class="keyword">val</span> c=<span class="keyword">new</span> <span class="type">C</span>  </span><br><span class="line"><span class="comment">// 由于A类与B类中都有readBook()，只能导入其中一个，否则调用共同方法时代码报错  </span></span><br><span class="line"><span class="comment">// c.readBook()  </span></span><br><span class="line"><span class="comment">// C类可以执行B类中的writeBook()  </span></span><br><span class="line">c.writeBook()  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-5-4-隐式参数案例四（员工领取薪水）"><a href="#3-5-4-隐式参数案例四（员工领取薪水）" class="headerlink" title="3.5.4 隐式参数案例四（员工领取薪水）"></a>3.5.4 隐式参数案例四（员工领取薪水）</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.implic_demo</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Company</span></span>&#123;  </span><br><span class="line"><span class="comment">// 在object中定义隐式值 注意：同一类型的隐式值只允许出现一次，否则会报错  </span></span><br><span class="line"><span class="keyword">implicit</span> <span class="keyword">val</span> aaa=<span class="string">"zhangsan"</span>  </span><br><span class="line"><span class="keyword">implicit</span> <span class="keyword">val</span> bbb=<span class="number">10000.00</span>  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;  </span><br><span class="line"><span class="comment">// 注意参数匹配的类型 它需要的是String类型的隐式值  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">callName</span></span>()(<span class="keyword">implicit</span> name:<span class="type">String</span>):<span class="type">String</span>=&#123;  </span><br><span class="line">	name+<span class="string">" is coming !"</span>  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// 定义一个用implicit修饰的参数  </span></span><br><span class="line"><span class="comment">// 注意参数匹配的类型 它需要的是Double类型的隐式值  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getMoney</span></span>()(<span class="keyword">implicit</span> money:<span class="type">Double</span>):<span class="type">String</span>=&#123;  </span><br><span class="line"><span class="string">" 当月薪水："</span>+money  </span><br><span class="line">&#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Boss</span> <span class="keyword">extends</span> <span class="title">App</span></span>&#123;  </span><br><span class="line"><span class="comment">// 使用import导入定义好的隐式值，注意：必须先加载否则会报错  </span></span><br><span class="line"><span class="keyword">import</span> <span class="type">Company</span>._  </span><br><span class="line"><span class="keyword">val</span> boss =<span class="keyword">new</span> <span class="type">Boss</span>  </span><br><span class="line">println(boss.callName()+boss.getMoney())  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag"># Scala</a>
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/03/2018-11-03-Scala编程风格指南/" rel="next" title="Scala编程风格指南">
+                <i class="fa fa-chevron-left"></i> Scala编程风格指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/hualvl.jpg" alt="Long">
+            
+              <p class="site-author-name" itemprop="name">Long</p>
+              <p class="site-description motion-element" itemprop="description">知识的孤岛越大,无知的海岸线越长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-高阶函数"><span class="nav-number">1.</span> <span class="nav-text">1. 高阶函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-作为值的函数"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.1 作为值的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-匿名函数"><span class="nav-number">1.3.</span> <span class="nav-text">1.1.2 匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-3-柯里化"><span class="nav-number">1.4.</span> <span class="nav-text">1.1.3 柯里化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.4.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">1.4.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-闭包"><span class="nav-number">2.</span> <span class="nav-text">2. 闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-什么是闭包"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 什么是闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-例子"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-隐式转换和隐式参数"><span class="nav-number">3.</span> <span class="nav-text">3.隐式转换和隐式参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-隐式转换"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 隐式转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-隐式参数"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 隐式参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-隐式转换方法作用域与导入"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 隐式转换方法作用域与导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-隐式转换的时机"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 隐式转换的时机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-隐式转换和隐式参数案例"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 隐式转换和隐式参数案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-1-隐式转换案例一（让File类具备RichFile类中的read方法）"><span class="nav-number">3.5.1.</span> <span class="nav-text">3.5.1 隐式转换案例一（让File类具备RichFile类中的read方法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-2-隐式转换案例二（超人变身）"><span class="nav-number">3.5.2.</span> <span class="nav-text">3.5.2 隐式转换案例二（超人变身）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-3-隐式转换案例三（一个类隐式转换成具有相同方法的多个类）"><span class="nav-number">3.5.3.</span> <span class="nav-text">3.5.3 隐式转换案例三（一个类隐式转换成具有相同方法的多个类）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-4-隐式参数案例四（员工领取薪水）"><span class="nav-number">3.5.4.</span> <span class="nav-text">3.5.4 隐式参数案例四（员工领取薪水）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Long</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">14.9k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
