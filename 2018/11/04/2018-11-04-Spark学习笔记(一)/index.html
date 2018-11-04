@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算框架,Spark,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、目标 掌握spark相关概念 掌握搭建一个spark集群 掌握编写简单的spark应用程序  2、spark概述2.1 spark是什么 Apache Spark™ is a unified analytics engine for large-scale data processing. spark是一个针对于大规模数据处理的统一分析引擎。  1spark是一个基于内存计算的大数据处理框架，">
+<meta name="keywords" content="计算框架,Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark学习笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2018/11/04/2018-11-04-Spark学习笔记(一)/index.html">
+<meta property="og:site_name" content="花驴">
+<meta property="og:description" content="1、目标 掌握spark相关概念 掌握搭建一个spark集群 掌握编写简单的spark应用程序  2、spark概述2.1 spark是什么 Apache Spark™ is a unified analytics engine for large-scale data processing. spark是一个针对于大规模数据处理的统一分析引擎。  1spark是一个基于内存计算的大数据处理框架，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="d:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97">
+<meta property="og:updated_time" content="2018-11-04T13:45:59.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark学习笔记(一)">
+<meta name="twitter:description" content="1、目标 掌握spark相关概念 掌握搭建一个spark集群 掌握编写简单的spark应用程序  2、spark概述2.1 spark是什么 Apache Spark™ is a unified analytics engine for large-scale data processing. spark是一个针对于大规模数据处理的统一分析引擎。  1spark是一个基于内存计算的大数据处理框架，">
+<meta name="twitter:image" content="d:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/04/2018-11-04-Spark学习笔记(一)/">
+
+
+
+
+
+  <title>Spark学习笔记(一) | 花驴</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花驴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生如此,拿酒来...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/04/2018-11-04-Spark学习笔记(一)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hualvl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花驴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-04T21:45:59+08:00">
+                2018-11-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-04T21:45:59+08:00">
+                2018-11-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.5k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  15 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1、目标"><a href="#1、目标" class="headerlink" title="1、目标"></a>1、目标</h4><ul>
+<li>掌握spark相关概念</li>
+<li>掌握搭建一个spark集群</li>
+<li>掌握编写简单的spark应用程序</li>
+</ul>
+<h4 id="2、spark概述"><a href="#2、spark概述" class="headerlink" title="2、spark概述"></a>2、spark概述</h4><h5 id="2-1-spark是什么"><a href="#2-1-spark是什么" class="headerlink" title="2.1 spark是什么"></a>2.1 spark是什么</h5><ul>
+<li><strong>Apache Spark™</strong> is a unified analytics engine for large-scale data processing.</li>
+<li>spark是一个针对于大规模数据处理的统一分析引擎。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark是一个基于内存计算的大数据处理框架，处理非常快。但是这里仅仅只涉及到数据的计算，并没有涉及到数据的存储，后期我们想要通过spark来处理数据，就需要跟外部的数据源进行对接。比如要处理hdfs上的数据。</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-为什么要学习spark"><a href="#2-2-为什么要学习spark" class="headerlink" title="2.2 为什么要学习spark"></a>2.2 为什么要学习spark</h5><ul>
+<li>spark计算速度比mapreduce快很多。</li>
+</ul>
+<h5 id="2-3-spark的四大特性"><a href="#2-3-spark的四大特性" class="headerlink" title="2.3 spark的四大特性"></a>2.3 spark的四大特性</h5><ul>
+<li>1、速度快<ul>
+<li>spark比mapreduce在内存中快100倍，比mapreduce在磁盘中快10倍</li>
+<li>快的主要2个原因:</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(1) spark在处理任务的时候，job的输出结果可以保存在内存中，而mapreduce它在处理任务的时候，job的输出结果是只能够保存在磁盘里面。后续又有其他的job需要依赖于前面job的输出结果，spark中可以直接从内存中获取得到，而mapreduce必须要进行大量的磁盘io操作才能够获取得到，这样一来，spark中的job就可以大大减少磁盘的io操作，最后提升性能。</span><br><span class="line"></span><br><span class="line">select name age <span class="keyword">from</span> (select * <span class="keyword">from</span><span class="built_in"> user </span>where age &gt;30 <span class="keyword">and</span> age &lt;40)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(2) mapreduce任务它是以进程的方式运行在yarn集群中，比如一个mapreduce任务有100个MapTask,这个时候要处理这100个MapTask就需要启动100个进程。spark任务它是以线程的方式运行在进程中。比如一个spark的任务有100个MapTask，这个时候要处理这100个MapTask可以只启动一个进程，在这一个进程中运行100个线程就可以了。这里启动一个进程跟启动一个线程它的代价肯定是不一样。启动一个进程比启动一个线程需要的时间和资源都是大大增加。spark任务需要的时间和资源是减少了，任务的性能得到了提升。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、易用性<ul>
+<li>可以快速写一个spark应用程序通过java、scala、python、R、sql语言来进行代码开发</li>
+</ul>
+</li>
+<li>3、通用性<ul>
+<li>spark框架就是一个生态系统，可以通过它的一些子项目sparksql、sparkStreaming、Mlib、Graphx来使用到不同的应用场景。</li>
+</ul>
+</li>
+<li>4、兼容性<ul>
+<li>spark程序就是一个计算任务的程序，哪里可以给当前这个任务提供计算的资源，我们就可以把spark程序提交到哪里去运行。<ul>
+<li>standalone<ul>
+<li>它是spark集群自带的集群模式，整个任务的资源分配由Master负责。</li>
+</ul>
+</li>
+<li>yarn<ul>
+<li>可以把spark程序提交到yarn中去运行，整个任务的资源分配由ResourceManager负责</li>
+</ul>
+</li>
+<li>mesos<ul>
+<li>它是一个apache类似于yarn的资源调度框架</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、spark集群安装部署"><a href="#3、spark集群安装部署" class="headerlink" title="3、spark集群安装部署"></a>3、spark集群安装部署</h4><ul>
+<li>1、下载对应spark版本安装包<ul>
+<li><a href="http://mirror.bit.edu.cn/apache/spark/spark-2.1.3/spark-2.1.3-bin-hadoop2.7.tgz" target="_blank" rel="noopener">http://mirror.bit.edu.cn/apache/spark/spark-2.1.3/spark-2.1.3-bin-hadoop2.7.tgz</a></li>
+<li>spark-2.1.3-bin-hadoop2.7.tgz</li>
+</ul>
+</li>
+<li>2、规划安装目录<ul>
+<li>/export/servers</li>
+</ul>
+</li>
+<li>3、上传安装包到服务器中</li>
+<li>4、解压安装包到指定的规划目录<ul>
+<li>tar -zxvf spark-2.1.3-bin-hadoop2.7.tgz -C /export/servers</li>
+</ul>
+</li>
+<li>5、重命名解压目录<ul>
+<li>mv spark-2.1.3-bin-hadoop2.7 spark</li>
+</ul>
+</li>
+<li>6、修改配置文件<ul>
+<li>进入到spark/conf目录下<ul>
+<li>vim spark-env.sh (mv spark-env.sh.template spark-env.sh)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加java环境变量</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">JAVA_HOME</span>=/export/servers/jdk</span><br><span class="line"><span class="comment">#配置master的IP地址</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SPARK_MASTER_HOST</span>=node1</span><br><span class="line"><span class="comment">#配置master的端口</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SPARK_MASTER_PORT</span>=7077</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vim slaves (mv slaves.template slaves)</li>
+</ul>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">#指定哪些节点是worker(把默认的值localhost干掉)</span></span><br><span class="line"><span class="attr">node2</span></span><br><span class="line"><span class="symbol">node3</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>7、配置spark的环境变量<ul>
+<li>vim /etc/profile</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="builtin-name">export</span> <span class="attribute">SPARK_HOME</span>=/export/servers/spark</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">PATH</span>=<span class="variable">$PATH</span>:$SPARK_HOME/bin:$SPARK_HOME/sbin</span><br></pre></td></tr></table></figure>
+<ul>
+<li>8、分发spark目录和spark环境变量到其他节点</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -r spark node2:/export/servers</span><br><span class="line">scp -r spark node3:/export/servers</span><br><span class="line"></span><br><span class="line">scp /etc<span class="built_in">/profile </span>node2:/etc</span><br><span class="line">scp /etc<span class="built_in">/profile </span>node3:/etc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>9、让所有spark节点的环境变量生效<ul>
+<li>在所有spark节点上执行<ul>
+<li>source /etc/profile</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、spark集群启动和停止"><a href="#4、spark集群启动和停止" class="headerlink" title="4、spark集群启动和停止"></a>4、spark集群启动和停止</h4><ul>
+<li>1、启动spark集群<ul>
+<li>可以在主节点上进入到spark/sbin 执行<ul>
+<li>./start-all.sh</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、停止spark集群<ul>
+<li>可以在主节点上进入到spark/sbin 执行<ul>
+<li>./stop-all.sh</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、spark集群web管理界面"><a href="#5、spark集群web管理界面" class="headerlink" title="5、spark集群web管理界面"></a>5、spark集群web管理界面</h4><ul>
+<li>1、先启动spark集群</li>
+<li>2、访问地址<ul>
+<li>master主机名:8080</li>
+<li>进去之后可以看到整个spark集群所有信息，这些信息主要包括：整个spark集群所有的资源信息，已经使用的spark集群资源信息、还剩的spark集群资源信息、还有worker相关的信息、还有正在运行的任务信息、还有已经完成的任务信息。</li>
+</ul>
+</li>
+</ul>
+<h4 id="6、基于zookeeper构建spark高可用集群"><a href="#6、基于zookeeper构建spark高可用集群" class="headerlink" title="6、基于zookeeper构建spark高可用集群"></a>6、基于zookeeper构建spark高可用集群</h4><ul>
+<li>1、需要安装zk集群</li>
+<li>2、修改配置文件<ul>
+<li>vim spark-env.sh</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#需要注释掉手动指定的masterip地址配置</span></span><br><span class="line"><span class="comment">#这个时候整个集群就有很多个master，活着的master不在由于我们自己手动指定，而是通过zk选举产生</span></span><br><span class="line"><span class="comment">#export SPARK_MASTER_HOST=node1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#引入zk 构建spark高可用集群</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">SPARK_DAEMON_JAVA_OPTS</span>=<span class="string">"-Dspark.deploy.recoveryMode=ZOOKEEPER  -Dspark.deploy.zookeeper.url=node1:2181,n</span></span><br><span class="line"><span class="string">ode2:2181,node3:2181  -Dspark.deploy.zookeeper.dir=/spark"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>3、分发spark-env.sh 到其他节点</li>
+<li>4、先启动zk集群</li>
+<li>5、启动spark集群<ul>
+<li>1、可以在任意一台机器启动（前提条件：就是需要实现所有机器两两之间它的ssh免密登陆）<ul>
+<li>start-all.sh</li>
+<li>在哪里执行上面这个脚本，它就会在当前机器启动一个Master进程</li>
+<li>整个spark集群来说worker进程由slaves文件决定</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>6、可以在其他机器单独启动master<ul>
+<li>start-master.sh</li>
+</ul>
+</li>
+<li>7、高可用说明</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">引入zk之后，整个spark集群就有很多个<span class="literal">master</span>，其中有一个<span class="literal">master</span>被zk选举成活着的<span class="literal">master</span>,其他多个<span class="literal">master</span>都处于standBy状态，启动完成之后这个时候它会把整个spark集群的元数据信息通过zk中的节点进行保存， 活着的<span class="literal">master</span>它会提供服务，处于standBy的<span class="literal">master</span>不会提供服务。</span><br><span class="line"></span><br><span class="line">当前活着的<span class="literal">master</span>挂掉了，首先zk会感知到，接下来会在所有处于standBy中的<span class="literal">master</span>进行选举，然后再来产生一个活着的新的<span class="literal">Master</span>，它会读取zk中保存集群的元数据信息，最后恢复到上一次<span class="literal">master</span>挂掉的状态。整个恢复的过程需要一定的时间，一般就是<span class="number">1</span>-<span class="number">2</span>分钟。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">当前整个spark集群中的<span class="literal">master</span>挂掉了，挂掉了之后到恢复结束整个过程对任务有什么影响？</span><br><span class="line">（<span class="number">1</span>）对于当前正在运行的任务，由于这个任务既然可以运行，说明它已经获取得到了任务计算需要的资源，对于它来有资源就可以继续运行，它是不受任何影响。</span><br><span class="line"></span><br><span class="line">（<span class="number">2</span>）对于后面要提交的任务，由于没有这样一个活着的<span class="literal">master</span>这个角色，整个任务就获取不到资源，它就无法运行。</span><br></pre></td></tr></table></figure>
+<h4 id="7、spark角色介绍"><a href="#7、spark角色介绍" class="headerlink" title="7、spark角色介绍"></a>7、spark角色介绍</h4><p><img src="D:/%E7%AC%AC%E4%B8%83%E9%98%B6%E6%AE%B5(%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97" alt="">/6%E3%80%81Spark%E8%AF%BE%E7%A8%8B/spark_day01/%E7%AC%94%E8%AE%B0/spark.png)</p>
+<ul>
+<li>1、Driver<ul>
+<li>它会运行客户端写好的main方法，并且会创建SparkContext对象，该对象是所有spark程序的执行入口。</li>
+</ul>
+</li>
+<li>2、Application<ul>
+<li>它就是一个计算任务的应用程序，它是包括了Driver端的代码以及整个任务在运行的时候需要的资源信息。</li>
+</ul>
+</li>
+<li>3、Cluster Manager<ul>
+<li>它就是一个可以获取到外部资源的服务<ul>
+<li>standAlone<ul>
+<li>它是spark自带的集群模式，整个任务的资源分配由Master负责</li>
+</ul>
+</li>
+<li>yarn<ul>
+<li>spark程序可以提交到yarn去运行，整个任务的资源分配由ResourceManager负责</li>
+</ul>
+</li>
+<li>mesos<ul>
+<li>它是一个apache开源类似于yarn的资源调度平台</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4、Master<ul>
+<li>它就是整个spark集群的老大，它负责任务资源的分配</li>
+</ul>
+</li>
+<li>5、Worker<ul>
+<li>它就是整个spark集群的小弟，它会负责任务的真正计算。</li>
+</ul>
+</li>
+<li>6、Executor<ul>
+<li>它就是一个进程，它会在worker节点来启动进程去运行任务</li>
+</ul>
+</li>
+<li>7、Task<ul>
+<li>它就是一个线程，它会以线程的方式运行在worker节点的executor进程中</li>
+</ul>
+</li>
+</ul>
+<h4 id="8、初识spark程序"><a href="#8、初识spark程序" class="headerlink" title="8、初识spark程序"></a>8、初识spark程序</h4><ul>
+<li>1、以普通模式提交任务到spark集群中运行（就是我们已经知道了整个spark集群活着的master地址）</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit \</span><br><span class="line">--class org<span class="selector-class">.apache</span><span class="selector-class">.spark</span><span class="selector-class">.examples</span><span class="selector-class">.SparkPi</span> \</span><br><span class="line">--master spark:<span class="comment">//node1:7077 \</span></span><br><span class="line">--executor-memory <span class="number">1</span>G \</span><br><span class="line">--total-executor-cores <span class="number">2</span> \</span><br><span class="line">examples/jars/spark-examples_2.<span class="number">11</span>-<span class="number">2.1</span>.<span class="number">3</span><span class="selector-class">.jar</span> \</span><br><span class="line"><span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、以高可用模式提交任务到spark集群中运行( 就是我们并不知道哪一个master是活着的master)</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit \</span><br><span class="line">--class org<span class="selector-class">.apache</span><span class="selector-class">.spark</span><span class="selector-class">.examples</span><span class="selector-class">.SparkPi</span> \</span><br><span class="line">--master spark:<span class="comment">//node1:7077,node2:7077,node3:7077 \</span></span><br><span class="line">--executor-memory <span class="number">1</span>G \</span><br><span class="line">--total-executor-cores <span class="number">2</span> \</span><br><span class="line">examples/jars/spark-examples_2.<span class="number">11</span>-<span class="number">2.1</span>.<span class="number">3</span><span class="selector-class">.jar</span> \</span><br><span class="line"><span class="number">10</span></span><br><span class="line"></span><br><span class="line">在高可用模式下提交任务，需要把所有的master都罗列出来 spark:<span class="comment">//node1:7077,node2:7077,node3:7077</span></span><br><span class="line">整个任务会轮训master列表，最后找到活着的master,然后向这个活着的master申请资源。</span><br></pre></td></tr></table></figure>
+<h4 id="9、spark-shell使用"><a href="#9、spark-shell使用" class="headerlink" title="9、spark-shell使用"></a>9、spark-shell使用</h4><h5 id="9-1-通过spark-shell-–master-local-N-读取本地数据文件实现单词统计"><a href="#9-1-通过spark-shell-–master-local-N-读取本地数据文件实现单词统计" class="headerlink" title="9.1 通过spark-shell –master local[N]读取本地数据文件实现单词统计"></a>9.1 通过spark-shell –master local[N]读取本地数据文件实现单词统计</h5><ul>
+<li>–master local[N]</li>
+<li>local 表示本地运行，跟spark集群没有任何关系，N表示一个正整数，在这里表示本地采用N个线程去跑任务</li>
+<li>提交脚本<ul>
+<li>spark-shell –master local[2]</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc.textFile(<span class="string">"file:///root/words.txt"</span>).flatMap(x=&gt;x.split(<span class="string">" "</span>)).map(x=&gt;(x,<span class="number">1</span>)).reduceByKey((x,y)=&gt;x+y).collect</span><br><span class="line"></span><br><span class="line">sc.textFile(<span class="string">"file:///root/words.txt"</span>).flatMap(_.split(<span class="string">" "</span>)).map((_,<span class="number">1</span>)).reduceByKey(_+_).collect</span><br></pre></td></tr></table></figure>
+<h5 id="9-2-通过spark-shell-–master-local-N-读取HDFS上数据文件实现单词统计"><a href="#9-2-通过spark-shell-–master-local-N-读取HDFS上数据文件实现单词统计" class="headerlink" title="9.2 通过spark-shell –master local[N]读取HDFS上数据文件实现单词统计"></a>9.2 通过spark-shell –master local[N]读取HDFS上数据文件实现单词统计</h5><ul>
+<li>提交脚本<ul>
+<li>spark-shell –master local[2]</li>
+<li>spark整合HDFS<ul>
+<li>vim spark-env.sh</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#spark整合hdfs</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">HADOOP_CONF_DIR</span>=/export/servers/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc.textFile(<span class="string">"hdfs://node1:9000/words.txt"</span>).flatMap(_.split(<span class="string">" "</span>)).map((_,<span class="number">1</span>)).reduceByKey(_+_).collect</span><br><span class="line"></span><br><span class="line">sc.textFile(<span class="string">"/words.txt"</span>).flatMap(_.split(<span class="string">" "</span>)).map((_,<span class="number">1</span>)).reduceByKey(_+_).collect</span><br></pre></td></tr></table></figure>
+<h5 id="9-3-通过-spark-shell-指定spark集群中活着的master"><a href="#9-3-通过-spark-shell-指定spark集群中活着的master" class="headerlink" title="9.3 通过 spark-shell 指定spark集群中活着的master"></a>9.3 通过 spark-shell 指定spark集群中活着的master</h5><ul>
+<li>提交脚本<ul>
+<li>spark-shell –master spark://node1:7077 –executor-memory 1g –total-executor-cores 2</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sc.textFile(<span class="string">"/words.txt"</span>).flatMap(_.split(<span class="string">" "</span>)).map((_,<span class="number">1</span>)).reduceByKey(_+_).saveAsTextFile(<span class="string">"/out"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="10、基于IDEA开发spark的程序"><a href="#10、基于IDEA开发spark的程序" class="headerlink" title="10、基于IDEA开发spark的程序"></a>10、基于IDEA开发spark的程序</h4><ul>
+<li>1、引入pom依赖(不是这个)</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.11.8<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="10-1-利用scala语言实现spark的wordcount程序（本地运行）"><a href="#10-1-利用scala语言实现spark的wordcount程序（本地运行）" class="headerlink" title="10.1 利用scala语言实现spark的wordcount程序（本地运行）"></a>10.1 利用scala语言实现spark的wordcount程序（本地运行）</h5><ul>
+<li>1、代码开发</li>
+</ul>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.spark</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.rdd.RDD</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;SparkConf, SparkContext&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//todo:利用scala语言去开发spark的wordcount程序</span></span><br><span class="line">object WordCount &#123;</span><br><span class="line">  def main(args: <span class="type">Array</span>[<span class="keyword">String</span>]): <span class="type">Unit </span>= &#123;</span><br><span class="line">    <span class="comment">//1、创建SparkConf对象 设置applicationName和master地址  local[2]表示本地采用2个线程运行任务</span></span><br><span class="line">      val sparkConf: <span class="type">SparkConf </span>= <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"WordCount"</span>).setMaster(<span class="string">"local[2]"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2、创建SparkContext对象 它是所有spark程序的入口，它内部会创建DAGScheduler和TaskScheduler</span></span><br><span class="line">      val sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(sparkConf)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3、读取数据文件</span></span><br><span class="line">      val data: <span class="type">RDD</span>[<span class="keyword">String</span>] = sc.textFile(<span class="string">"E:\\words.txt"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4、切分每一行，获取所有的单词</span></span><br><span class="line">     val words: <span class="type">RDD</span>[<span class="keyword">String</span>] = data.flatMap(<span class="literal">_</span>.split(<span class="string">" "</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5、每个单词计为1</span></span><br><span class="line">      val wordAndOne: <span class="type">RDD</span>[(<span class="keyword">String</span>, <span class="keyword">Int</span>)] = words.map((<span class="literal">_</span>,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//6、相同单词出现的1累加</span></span><br><span class="line">      val result: <span class="type">RDD</span>[(<span class="keyword">String</span>, <span class="keyword">Int</span>)] = wordAndOne.reduceByKey(<span class="literal">_</span>+<span class="literal">_</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment">//按照单词出现的次数降序排列  sortBy默认是升序，给false就是降序</span></span><br><span class="line">         val sortRDD: <span class="type">RDD</span>[(<span class="keyword">String</span>, <span class="keyword">Int</span>)] = result.sortBy(x=&gt;x._2,<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//7、收集打印</span></span><br><span class="line">      val finalResult: <span class="type">Array</span>[(<span class="keyword">String</span>, <span class="keyword">Int</span>)] = sortRDD.collect()</span><br><span class="line">      finalResult.foreach(println)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//8、关闭sparkcontext</span></span><br><span class="line">      sc.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="10-2-利用scala语言实现spark的wordcount程序（集群运行）"><a href="#10-2-利用scala语言实现spark的wordcount程序（集群运行）" class="headerlink" title="10.2 利用scala语言实现spark的wordcount程序（集群运行）"></a>10.2 利用scala语言实现spark的wordcount程序（集群运行）</h5><ul>
+<li>1、代码开发</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.spark</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.rdd.<span class="type">RDD</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//todo:利用scala语言开发spark的wordcount（集群运行）</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">WordCount_Online</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="comment">//1、创建SparkConf对象 设置applicationName</span></span><br><span class="line">    <span class="keyword">val</span> sparkConf: <span class="type">SparkConf</span> = <span class="keyword">new</span> <span class="type">SparkConf</span>().setAppName(<span class="string">"WordCount_Online"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2、创建SparkContext对象 它是所有spark程序的入口，它内部会创建DAGScheduler和TaskScheduler</span></span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(sparkConf)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3、读取数据文件</span></span><br><span class="line">    <span class="keyword">val</span> data: <span class="type">RDD</span>[<span class="type">String</span>] = sc.textFile(args(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4、切分每一行，获取所有的单词</span></span><br><span class="line">    <span class="keyword">val</span> words: <span class="type">RDD</span>[<span class="type">String</span>] = data.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//5、每个单词计为1</span></span><br><span class="line">    <span class="keyword">val</span> wordAndOne: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = words.map((_,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//6、相同单词出现的1累加</span></span><br><span class="line">    <span class="keyword">val</span> result: <span class="type">RDD</span>[(<span class="type">String</span>, <span class="type">Int</span>)] = wordAndOne.reduceByKey(_+_)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//7、把结果数据保存到hdfs上</span></span><br><span class="line">    result.saveAsTextFile(args(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">//8、关闭sparkcontext</span></span><br><span class="line">    sc.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>2、打成jar包提交到集群运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spark-submit --master spark://node1:7077 --class cn.itcast.spark.WordCount_Online --executor-memory 1g --total-executor-cores 4 original-spark_class12-1.0-SNAPSHOT.jar /words.txt  /out_spark</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="10-3-利用java-语言开发spark的wordcount程序（本地运行）"><a href="#10-3-利用java-语言开发spark的wordcount程序（本地运行）" class="headerlink" title="10.3 利用java 语言开发spark的wordcount程序（本地运行）"></a>10.3 利用java 语言开发spark的wordcount程序（本地运行）</h5><ul>
+<li>1、代码开发</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.spark;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.SparkConf;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaRDD;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.FlatMapFunction;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.Function2;</span><br><span class="line"><span class="keyword">import</span> org.apache.spark.api.java.function.PairFunction;</span><br><span class="line"><span class="keyword">import</span> scala.Tuple2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">//todo:利用java实现spark的wordcount程序</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCount_Java</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//1、创建SparkConf对象</span></span><br><span class="line">        SparkConf sparkConf = <span class="keyword">new</span> SparkConf().setAppName(<span class="string">"WordCount_Java"</span>).setMaster(<span class="string">"local[2]"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2、创建JavaSparkContext对象</span></span><br><span class="line">        JavaSparkContext jsc = <span class="keyword">new</span> JavaSparkContext(sparkConf);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、读取数据文件</span></span><br><span class="line">        JavaRDD&lt;String&gt; data = jsc.textFile(<span class="string">"E:\\words.txt"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4、切分每一行，获取所有的单词</span></span><br><span class="line">        JavaRDD&lt;String&gt; words = data.flatMap(<span class="keyword">new</span> FlatMapFunction&lt;String, String&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Iterator&lt;String&gt; <span class="title">call</span><span class="params">(String line)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                String[] words = line.split(<span class="string">" "</span>);</span><br><span class="line">                <span class="keyword">return</span> Arrays.asList(words).iterator();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5、每个单词计为1</span></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; wordAndOne = words.mapToPair(<span class="keyword">new</span> PairFunction&lt;String, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(String word)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(word, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//6、相同单词出现的1累加</span></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; result = wordAndOne.reduceByKey(<span class="keyword">new</span> Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">(Integer v1, Integer v2)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> v1 + v2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//按照单词出现的次数降序 (单词，次数)-------&gt;(次数，单词).sortByKey-----&gt;(单词，次数)</span></span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;Integer, String&gt; reverseJavaPairRDD = result.mapToPair(<span class="keyword">new</span> PairFunction&lt;Tuple2&lt;String, Integer&gt;, Integer, String&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;Integer, String&gt; <span class="title">call</span><span class="params">(Tuple2&lt;String, Integer&gt; t)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;Integer, String&gt;(t._2, t._1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        JavaPairRDD&lt;String, Integer&gt; sortedJavaPairRDD = reverseJavaPairRDD.sortByKey(<span class="keyword">false</span>).mapToPair(<span class="keyword">new</span> PairFunction&lt;Tuple2&lt;Integer, String&gt;, String, Integer&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Tuple2&lt;String, Integer&gt; <span class="title">call</span><span class="params">(Tuple2&lt;Integer, String&gt; t)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> Tuple2&lt;String, Integer&gt;(t._2, t._1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7、收集打印</span></span><br><span class="line">        List&lt;Tuple2&lt;String, Integer&gt;&gt; finalResult = sortedJavaPairRDD.collect();</span><br><span class="line">        <span class="keyword">for</span> (Tuple2&lt;String, Integer&gt; tuple : finalResult) &#123;</span><br><span class="line">            System.out.println(<span class="string">"单词："</span>+ tuple._1+<span class="string">" 次数："</span>+tuple._2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//8、关闭jsc</span></span><br><span class="line">        jsc.stop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算框架/" rel="tag"># 计算框架</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/04/2018-11-04-经典MR之WordCount/" rel="next" title="MapReduce-WordCount">
+                <i class="fa fa-chevron-left"></i> MapReduce-WordCount
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/hualvl.jpg" alt="Long">
+            
+              <p class="site-author-name" itemprop="name">Long</p>
+              <p class="site-description motion-element" itemprop="description">知识的孤岛越大,无知的海岸线越长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、目标"><span class="nav-number">1.</span> <span class="nav-text">1、目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、spark概述"><span class="nav-number">2.</span> <span class="nav-text">2、spark概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-spark是什么"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 spark是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-为什么要学习spark"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 为什么要学习spark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-spark的四大特性"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 spark的四大特性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、spark集群安装部署"><span class="nav-number">3.</span> <span class="nav-text">3、spark集群安装部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、spark集群启动和停止"><span class="nav-number">4.</span> <span class="nav-text">4、spark集群启动和停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、spark集群web管理界面"><span class="nav-number">5.</span> <span class="nav-text">5、spark集群web管理界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、基于zookeeper构建spark高可用集群"><span class="nav-number">6.</span> <span class="nav-text">6、基于zookeeper构建spark高可用集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、spark角色介绍"><span class="nav-number">7.</span> <span class="nav-text">7、spark角色介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、初识spark程序"><span class="nav-number">8.</span> <span class="nav-text">8、初识spark程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、spark-shell使用"><span class="nav-number">9.</span> <span class="nav-text">9、spark-shell使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#9-1-通过spark-shell-–master-local-N-读取本地数据文件实现单词统计"><span class="nav-number">9.1.</span> <span class="nav-text">9.1 通过spark-shell –master local[N]读取本地数据文件实现单词统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-2-通过spark-shell-–master-local-N-读取HDFS上数据文件实现单词统计"><span class="nav-number">9.2.</span> <span class="nav-text">9.2 通过spark-shell –master local[N]读取HDFS上数据文件实现单词统计</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-3-通过-spark-shell-指定spark集群中活着的master"><span class="nav-number">9.3.</span> <span class="nav-text">9.3 通过 spark-shell 指定spark集群中活着的master</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、基于IDEA开发spark的程序"><span class="nav-number">10.</span> <span class="nav-text">10、基于IDEA开发spark的程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#10-1-利用scala语言实现spark的wordcount程序（本地运行）"><span class="nav-number">10.1.</span> <span class="nav-text">10.1 利用scala语言实现spark的wordcount程序（本地运行）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-利用scala语言实现spark的wordcount程序（集群运行）"><span class="nav-number">10.2.</span> <span class="nav-text">10.2 利用scala语言实现spark的wordcount程序（集群运行）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-3-利用java-语言开发spark的wordcount程序（本地运行）"><span class="nav-number">10.3.</span> <span class="nav-text">10.3 利用java 语言开发spark的wordcount程序（本地运行）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Long</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">20.4k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
