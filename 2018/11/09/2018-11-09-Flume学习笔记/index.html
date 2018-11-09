@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="常识,OLTP&OLAP,">
+  <meta name="keywords" content="日志采集框架,Flume,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="1. 数据库(DataBase) 面向事务设计 支持事务 数据的存储尽量避免冗余,侧重于性能 目的是存储产生的业务数据 其中的数据相对不稳定,会有经常性的CURD操作 常用的数据库管理系统:MySQL,Oracle,SQL Server,MongoDB,Redis等  2. 数据仓库(Data Warehouse) 面向主题设计 不支持事务 数据的存储有意引入冗余,侧重于数据分析 目的是分析已有的">
-<meta name="keywords" content="常识,OLTP&amp;OLAP">
+<meta name="description" content="1. 概念:Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统,可以采集socket数据包,文件,文件夹,kafka中的数据等多种形式的源数据 2. 组件: agent source(对接不同的数据源,需要使用不同的source类型) channel(在Flume的推或拉模式种保证数据的完整性,也可以起到数据缓冲的作用) sink(下沉地,可以是文件存储系统,也可以是下一级的s">
+<meta name="keywords" content="日志采集框架,Flume">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据库VS数据仓库">
-<meta property="og:url" content="http://yoursite.com/2018/11/06/2018-11-06-数据库VS数据仓库/index.html">
+<meta property="og:title" content="Flume学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/2018-11-09-Flume学习笔记/index.html">
 <meta property="og:site_name" content="花驴">
-<meta property="og:description" content="1. 数据库(DataBase) 面向事务设计 支持事务 数据的存储尽量避免冗余,侧重于性能 目的是存储产生的业务数据 其中的数据相对不稳定,会有经常性的CURD操作 常用的数据库管理系统:MySQL,Oracle,SQL Server,MongoDB,Redis等  2. 数据仓库(Data Warehouse) 面向主题设计 不支持事务 数据的存储有意引入冗余,侧重于数据分析 目的是分析已有的">
+<meta property="og:description" content="1. 概念:Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统,可以采集socket数据包,文件,文件夹,kafka中的数据等多种形式的源数据 2. 组件: agent source(对接不同的数据源,需要使用不同的source类型) channel(在Flume的推或拉模式种保证数据的完整性,也可以起到数据缓冲的作用) sink(下沉地,可以是文件存储系统,也可以是下一级的s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T07:19:46.696Z">
+<meta property="og:updated_time" content="2018-11-09T15:54:31.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库VS数据仓库">
-<meta name="twitter:description" content="1. 数据库(DataBase) 面向事务设计 支持事务 数据的存储尽量避免冗余,侧重于性能 目的是存储产生的业务数据 其中的数据相对不稳定,会有经常性的CURD操作 常用的数据库管理系统:MySQL,Oracle,SQL Server,MongoDB,Redis等  2. 数据仓库(Data Warehouse) 面向主题设计 不支持事务 数据的存储有意引入冗余,侧重于数据分析 目的是分析已有的">
+<meta name="twitter:title" content="Flume学习笔记">
+<meta name="twitter:description" content="1. 概念:Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统,可以采集socket数据包,文件,文件夹,kafka中的数据等多种形式的源数据 2. 组件: agent source(对接不同的数据源,需要使用不同的source类型) channel(在Flume的推或拉模式种保证数据的完整性,也可以起到数据缓冲的作用) sink(下沉地,可以是文件存储系统,也可以是下一级的s">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/06/2018-11-06-数据库VS数据仓库/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/2018-11-09-Flume学习笔记/">
 
 
 
 
 
-  <title>数据库VS数据仓库 | 花驴</title>
+  <title>Flume学习笔记 | 花驴</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/06/2018-11-06-数据库VS数据仓库/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/2018-11-09-Flume学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Long">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据库VS数据仓库</h1>
+          <h1 class="post-title" itemprop="name headline">Flume学习笔记</h1>
         
 
         <div class="post-meta">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-06T15:19:29+08:00">
-                2018-11-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T23:54:31+08:00">
+                2018-11-09
               </time>
             
 
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-06T15:19:46+08:00">
-                2018-11-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-09T23:54:31+08:00">
+                2018-11-09
               </time>
             
           </span>
@@ -382,7 +382,7 @@
 
           
           
-             <span id="/2018/11/06/2018-11-06-数据库VS数据仓库/" class="leancloud_visitors" data-flag-title="数据库VS数据仓库">
+             <span id="/2018/11/09/2018-11-09-Flume学习笔记/" class="leancloud_visitors" data-flag-title="Flume学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  167 字
+                  1.3k 字
                 </span>
               
 
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -444,23 +444,23 @@
       
 
       
-        <h3 id="1-数据库-DataBase"><a href="#1-数据库-DataBase" class="headerlink" title="1. 数据库(DataBase)"></a>1. 数据库(DataBase)</h3><ul>
-<li>面向事务设计</li>
-<li>支持事务</li>
-<li>数据的存储尽量避免冗余,侧重于性能</li>
-<li>目的是存储产生的业务数据</li>
-<li>其中的数据相对不稳定,会有经常性的CURD操作</li>
-<li>常用的数据库管理系统:MySQL,Oracle,SQL Server,MongoDB,Redis等</li>
+        <h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念:"></a>1. 概念:</h3><p>Flume是一个分布式、可靠、和高可用的海量日志采集、聚合和传输的系统,可以采集socket数据包,文件,文件夹,kafka中的数据等多种形式的源数据</p>
+<h3 id="2-组件"><a href="#2-组件" class="headerlink" title="2. 组件:"></a>2. 组件:</h3><ul>
+<li>agent<ul>
+<li>source(对接不同的数据源,需要使用不同的source类型)</li>
+<li>channel(在Flume的推或拉模式种保证数据的完整性,也可以起到数据缓冲的作用)</li>
+<li>sink(下沉地,可以是文件存储系统,也可以是下一级的source,常使用Avro,exec等类型)</li>
 </ul>
-<h3 id="2-数据仓库-Data-Warehouse"><a href="#2-数据仓库-Data-Warehouse" class="headerlink" title="2. 数据仓库(Data Warehouse)"></a>2. 数据仓库(Data Warehouse)</h3><ul>
-<li>面向主题设计</li>
-<li>不支持事务</li>
-<li>数据的存储有意引入冗余,侧重于数据分析</li>
-<li>目的是分析已有的历史数据</li>
-<li>其中的数据相对稳定,一旦加载进去几乎不改动,只查询</li>
-<li>常用的数据仓库管理系统:Hive,AWS,RedShift,GreenPlum,Impala等</li>
+</li>
+<li>在以上三个组件种流动的数据以event为最小单位</li>
+<li>详细的组件介绍和使用尽量参照官网上的user guidance</li>
 </ul>
-
+<h3 id="3-Fail-Over-高可用"><a href="#3-Fail-Over-高可用" class="headerlink" title="3. Fail Over(高可用)"></a>3. Fail Over(高可用)</h3><p>关键词:配置权重</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">set</span> failover</span></span><br><span class="line">agent1.sinkgroups.g1.processor.type = failover</span><br><span class="line"><span class="meta">#</span><span class="bash">为节点配置的权重</span></span><br><span class="line">agent1.sinkgroups.g1.processor.priority.k1 = 10  </span><br><span class="line">agent1.sinkgroups.g1.processor.priority.k2 = 1</span><br></pre></td></tr></table></figure>
+<h3 id="4-Load-Balance-负载均衡"><a href="#4-Load-Balance-负载均衡" class="headerlink" title="4. Load Balance(负载均衡)"></a>4. Load Balance(负载均衡)</h3><p>关键词:并行采集海量数据,最后再做汇总</p>
+<h3 id="5-自定义拦截器Interceptor"><a href="#5-自定义拦截器Interceptor" class="headerlink" title="5. 自定义拦截器Interceptor"></a>5. 自定义拦截器Interceptor</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implements Interceptor(实现interceptor接口)</span><br><span class="line">打包到Flume集群目录中的<span class="class"><span class="keyword">lib</span>路径下,执行</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-Flume如何保证数据传输的完整性"><a href="#6-Flume如何保证数据传输的完整性" class="headerlink" title="6. Flume如何保证数据传输的完整性?"></a>6. Flume如何保证数据传输的完整性?</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">一：Flume的事务机制 </span><br><span class="line">类似数据库的事务机制：Flume使用两个独立的事务分别负责从soucrce到channel，以及从channel到sink的事件传递。比如以官网上的事例为例：spooling directory <span class="keyword">source</span> 为文件的每一行创建一个事件，一旦事务中所有的事件全部传递到channel且提交成功，那么<span class="keyword">source</span>就将该文件标记为完成。同理，事务以类似的方式处理从channel到sink的传递过程，如果因为某种原因使得事件无法记录，那么事务将会回滚。且所有的事件都会保持到channel中，等待重新传递。</span><br><span class="line"></span><br><span class="line">二:Flume的At-least-once提交方式</span><br><span class="line">Flume的事务机制，总的来说，保证了<span class="keyword">source</span>产生的每个事件都会传送到sink中。但是值得一说的是，实际上Flume作为高容量并行采集系统采用的是At-least-once（传统的企业系统采用的是exactly-once机制）提交方式，这样就造成每个<span class="keyword">source</span>产生的事件至少到达sink一次，换句话说就是同一事件有可能重复到达。这样虽然看上去是一个缺陷，但是相比为了保证Flume能够可靠地将事件从<span class="keyword">source</span>,channel传递到sink,这也是一个可以接受的权衡。如spooldir的使用，Flume会对已经处理完的数据进行标记。</span><br><span class="line"></span><br><span class="line">三：Flume的批处理机制</span><br><span class="line">为了提高效率，Flume尽可能的以事务为单位来处理事件，而不是逐一基于事件进行处理。比如上篇博客提到的spooling directory <span class="keyword">source</span>以<span class="number">100</span>行文本作为一个批次来读取（BatchSize属性来配置，类似数据库的批处理模式）。批处理的设置尤其有利于提高<span class="keyword">file</span> channle的效率，这样整个事务只需要写入一次本地磁盘，或者调用一次fsync，速度会快很多。</span><br></pre></td></tr></table></figure>
+<h3 id="7-其它"><a href="#7-其它" class="headerlink" title="7. 其它"></a>7. 其它</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、Flume的采集频率?</span><br><span class="line">你们线上的环境如何配置控制文件的大小? </span><br><span class="line">基于两个配置 : 一个是时间的长短  一个是基于文件的大小</span><br><span class="line">如果flume是收集数据放到到消息队列kafka当中:就是做实时处理，处理频率比较快,大概每三秒钟左右数据灌入一次到kafka</span><br><span class="line">如果flume是采集数据放到hdfs上面去做离线处理：尽量的控制文件的大小在<span class="number">128</span>M左右一个比较合适,一般时间长短控制在<span class="number">15</span>分钟到半个小时左右</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、如何保证flume的持续的高可用?</span><br><span class="line">如果flume没有工作了，从数据源来看，数据没有被收集,即被监控的目录中的文件没有增加后缀。</span><br><span class="line">从另外一方面数据的目的地来看：如果flume没有工作，数据的目的地那里没有增加数据</span><br><span class="line">写一个<span class="built_in">shell</span>脚本，定时的去查看一下数据源以及数据目的地，看看数据有没有被收集</span><br><span class="line">配置flume的failover也可以</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>Flumed的Failover(高可用) : 集群的高可用(故障转移),通过配置agent的权重决定谁优先采集数据,另一个备用</span><br><span class="line">场景如下：我们在Agent1节点上传文件，由于我们配置Collector1的权重比Collector2大，所以 Collector1优先采集并上传到存储系统。然后我们kill掉Collector1，此时有Collector2负责日志的采集上传工作，之后，我们手动恢复Collector1节点的Flume服务，再次在Agent1上次文件，发现Collector1恢复优先级别的采集工作</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span>flume的负载均衡(<span class="keyword">Load</span> <span class="built_in">Balance</span>) : 解决一台机器无法处理所有的数据</span><br><span class="line">负载均衡适用于解决一台机器(一个进程)无法解决所有请求而产生的一种算法</span><br><span class="line"><span class="keyword">Load</span> balancing Sink Processor能够实现<span class="keyword">load</span> <span class="built_in">balance</span> 功能.</span><br><span class="line"></span><br><span class="line">数据的脱敏:在采集数据的时候为了避免开发人员直接接触到敏感隐私的数据,在采集数据之前对需要隐藏的敏感隐私数据进行加密,使之不能被数据采集者,数据处理者直接看到,需要自定义拦截器并实现interceptor接口</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -489,9 +489,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/常识/" rel="tag"># 常识</a>
+            <a href="/tags/日志采集框架/" rel="tag"># 日志采集框架</a>
           
-            <a href="/tags/OLTP-OLAP/" rel="tag"># OLTP&OLAP</a>
+            <a href="/tags/Flume/" rel="tag"># Flume</a>
           
         </div>
       
@@ -504,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/04/2018-11-04-Spark学习笔记(一)/" rel="next" title="Spark学习笔记(一)">
-                <i class="fa fa-chevron-left"></i> Spark学习笔记(一)
+              <a href="/2018/11/09/2018-11-09-Spark学习笔记(四)/" rel="next" title="Spark学习笔记(四)">
+                <i class="fa fa-chevron-left"></i> Spark学习笔记(四)
               </a>
             
           </div>
@@ -513,10 +513,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/06/2018-11-06-Hive/" rel="prev" title="数据仓库工具--Hive">
-                数据仓库工具--Hive <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -665,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库-DataBase"><span class="nav-number">1.</span> <span class="nav-text">1. 数据库(DataBase)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据仓库-Data-Warehouse"><span class="nav-number">2.</span> <span class="nav-text">2. 数据仓库(Data Warehouse)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念"><span class="nav-number">1.</span> <span class="nav-text">1. 概念:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-组件"><span class="nav-number">2.</span> <span class="nav-text">2. 组件:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Fail-Over-高可用"><span class="nav-number">3.</span> <span class="nav-text">3. Fail Over(高可用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Load-Balance-负载均衡"><span class="nav-number">4.</span> <span class="nav-text">4. Load Balance(负载均衡)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-自定义拦截器Interceptor"><span class="nav-number">5.</span> <span class="nav-text">5. 自定义拦截器Interceptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Flume如何保证数据传输的完整性"><span class="nav-number">6.</span> <span class="nav-text">6. Flume如何保证数据传输的完整性?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-其它"><span class="nav-number">7.</span> <span class="nav-text">7. 其它</span></a></li></ol></div>
             
 
           </div>
