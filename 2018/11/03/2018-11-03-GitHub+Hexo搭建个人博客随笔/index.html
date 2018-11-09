@@ -449,27 +449,27 @@
 <ul>
 <li>检测是否安装成功:</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git --version</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git --version</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>配置用户账户和邮箱</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git config --global user.name "GitHub用户名"</span><br><span class="line"><span class="meta">$</span> git config --global user.email "GitHub注册邮箱"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.name <span class="string">"GitHub用户名"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git config --global user.email <span class="string">"GitHub注册邮箱"</span></span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>生成SSH密钥文件</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ssh-keygen -t rsa -C "GitHub注册邮箱"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh-keygen -t rsa -C <span class="string">"GitHub注册邮箱"</span></span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>检测GitHub公钥是否配置成功</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ssh git@github.com</span><br><span class="line"></span><br><span class="line">出现如下信息说明配置成功:</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi DemonsIT! You've successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ssh git@github.com</span></span><br><span class="line"></span><br><span class="line">出现如下信息说明配置成功:</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi DemonsIT! You've successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
 <ul>
 <li>关联远程仓库</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git remote add origin git@github.com:DemonsIT/demonsit.github.io.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote add origin git@github.com:DemonsIT/demonsit.github.io.git</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>向远程仓库上的master主干推送本地分支</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git push -u origin master    // 第一次推送</span><br><span class="line"><span class="meta">$</span> git push origin master       // 之后的修改推送</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git push -u origin master    // 第一次推送</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master       // 之后的修改推送</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>GitHub</p>
 <ul>
@@ -484,18 +484,18 @@
 <ul>
 <li>检测是否安装成功:</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> node -v</span><br><span class="line"><span class="meta">$</span> npm -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> node -v</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm -v</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Hexo</p>
 <ul>
 <li>首先新建一个文件夹<code>Blog</code>,用于搭建环境</li>
 <li>在<code>Blog</code>中打开<code>Git Bash Here</code>,安装Hexo</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>命名和初始化首个博客(依次单步执行)</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo init blog</span><br><span class="line"><span class="meta">$</span> hexo new My_first_blog</span><br><span class="line"><span class="meta">$</span> hexo g</span><br><span class="line"><span class="meta">$</span> hexo s</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo new My_first_blog</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo g</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> hexo s</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">现在来介绍常用的Hexo 命令</span><br><span class="line"></span><br><span class="line">npm install hexo -g #安装Hexo</span><br><span class="line">npm update hexo -g #升级 </span><br><span class="line">hexo init #初始化博客</span><br><span class="line">hexo --<span class="builtin-name">debug</span> #查看hexo中安装的插件等信息</span><br><span class="line"></span><br><span class="line">命令简写</span><br><span class="line">hexo n <span class="string">"我的博客"</span> == hexo new <span class="string">"我的博客"</span> #新建文章</span><br><span class="line">hexo g == hexo generate #生成</span><br><span class="line">hexo s == hexo<span class="built_in"> server </span>#启动服务预览</span><br><span class="line">hexo d == hexo deploy #部署</span><br><span class="line"></span><br><span class="line">hexo<span class="built_in"> server </span>#Hexo会监视文件变动并自动更新，无须重启服务器</span><br><span class="line">hexo<span class="built_in"> server </span>-s #静态模式</span><br><span class="line">hexo<span class="built_in"> server </span>-p 5000 #更改端口</span><br><span class="line">hexo<span class="built_in"> server </span>-i 192.168.1.1 #自定义 IP</span><br><span class="line">hexo clean #清除缓存，若是网页正常情况下可以忽略这条命令</span><br><span class="line"></span><br><span class="line">刚刚的三个命令依次是新建一篇博客文章、生成网页、在本地预览的操作。</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>执行,启动服务(本地测试)</p>
@@ -645,7 +645,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -667,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -744,7 +744,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">23.9k</span>
+    <span title="Site words total count">26.1k</span>
   
 </div>
 

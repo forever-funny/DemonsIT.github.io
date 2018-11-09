@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算框架,Spark,RDD,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1、学习目标 1、掌握RDD底层原理 2、掌握RDD常用的算子操作 3、掌握RDD的依赖关系 4、掌握RDD的缓存机制 5、掌握划分stage 6、掌握spark任务调度流程  2、RDD概述2.1 RDD是什么12345RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。R">
+<meta name="keywords" content="计算框架,Spark,RDD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark学习笔记(二)">
+<meta property="og:url" content="http://yoursite.com/2018/11/09/2018-11-09-Spark学习笔记(二)/index.html">
+<meta property="og:site_name" content="花驴">
+<meta property="og:description" content="1、学习目标 1、掌握RDD底层原理 2、掌握RDD常用的算子操作 3、掌握RDD的依赖关系 4、掌握RDD的缓存机制 5、掌握划分stage 6、掌握spark任务调度流程  2、RDD概述2.1 RDD是什么12345RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。R">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-09T06:32:25.978Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark学习笔记(二)">
+<meta name="twitter:description" content="1、学习目标 1、掌握RDD底层原理 2、掌握RDD常用的算子操作 3、掌握RDD的依赖关系 4、掌握RDD的缓存机制 5、掌握划分stage 6、掌握spark任务调度流程  2、RDD概述2.1 RDD是什么12345RDD（Resilient Distributed Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。R">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/09/2018-11-09-Spark学习笔记(二)/">
+
+
+
+
+
+  <title>Spark学习笔记(二) | 花驴</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花驴</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人生如此,拿酒来...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/2018-11-09-Spark学习笔记(二)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hualvl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花驴">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark学习笔记(二)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-09T14:32:25+08:00">
+                2018-11-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-09T14:32:25+08:00">
+                2018-11-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/09/2018-11-09-Spark学习笔记(二)/" class="leancloud_visitors" data-flag-title="Spark学习笔记(二)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1、学习目标"><a href="#1、学习目标" class="headerlink" title="1、学习目标"></a>1、学习目标</h4><ul>
+<li>1、掌握RDD底层原理</li>
+<li>2、掌握RDD常用的算子操作</li>
+<li>3、掌握RDD的依赖关系</li>
+<li>4、掌握RDD的缓存机制</li>
+<li>5、掌握划分stage</li>
+<li>6、掌握spark任务调度流程</li>
+</ul>
+<h4 id="2、RDD概述"><a href="#2、RDD概述" class="headerlink" title="2、RDD概述"></a>2、RDD概述</h4><h5 id="2-1-RDD是什么"><a href="#2-1-RDD是什么" class="headerlink" title="2.1 RDD是什么"></a>2.1 RDD是什么</h5><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RDD（Resilient <span class="keyword">Distributed</span> Dataset）叫做弹性分布式数据集，是Spark中最基本的数据抽象，它代表一个不可变、可分区、里面的元素可并行计算的集合。</span><br><span class="line"></span><br><span class="line">Resilient：弹性,适应能力强,可恢复 表示的含义：rdd的数据是可以保存在内存或者是磁盘中</span><br><span class="line"><span class="keyword">Distributed</span>：它的数据是分布式存储的，方便后期进行分布式计算</span><br><span class="line">Dataset：数据集合，集合里面可以存放很多个元素</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-RDD的五大属性"><a href="#2-2-RDD的五大属性" class="headerlink" title="2.2 RDD的五大属性"></a>2.2 RDD的五大属性</h5><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>) A list <span class="keyword">of</span> partitions</span><br><span class="line">   一个分区列表，也就是说一个rdd有很多个分区，分区里面才是真正的数据，而spark任务的执行是以分区为单位，一个分区就对应后期的一个task（线程）。</span><br><span class="line">   读取HDFS上数据文件产生的RDD分区数跟block块的个数相等</span><br><span class="line">   如果一个文件只有一个block块，它会产生<span class="number">2</span>个rdd分区（默认最小值就是<span class="number">2</span>）,也即会生成两个结果文件</span><br><span class="line"></span><br><span class="line">(<span class="number">2</span>) A <span class="function"><span class="keyword">function</span> <span class="title">for</span> <span class="title">computing</span> <span class="title">each</span> <span class="title">split</span></span></span><br><span class="line">  作用在每一个分区中的函数</span><br><span class="line">  e.g:val rdd2=rdd1.map(x=&gt;(x,<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">(<span class="number">3</span>) A list <span class="keyword">of</span> dependencies <span class="keyword">on</span> <span class="title">other</span> <span class="title">RDDs</span></span><br><span class="line">  一个rdd会依赖于其它多个rdd，这里就涉及到rdd与rdd之间的依赖关系，后期spark的容错机制就是根据这个特性而来</span><br><span class="line"></span><br><span class="line">(<span class="number">4</span>) Optionally, <span class="keyword">a</span> Partitioner <span class="keyword">for</span> key-<span class="built_in">value</span> RDDs (e.g. <span class="built_in">to</span> say that <span class="keyword">the</span> RDD is hash-partitioned)</span><br><span class="line">（可选项）对于kv类型的rdd才有分区函数概念（必须要产生shuffle),不是kv类型的rdd它的分区函数是None（就是没有）。分区函数作用：决定了数据会流入到哪里去</span><br><span class="line"></span><br><span class="line">spark中有<span class="number">2</span>种分区函数，第一种是基于哈希的hashPartitioner, key.hashcode%分区数=分区号，这个分区函数是默认值。第二种基于范围RangePartitioner</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="number">5</span>) Optionally, <span class="keyword">a</span> list <span class="keyword">of</span> preferred locations <span class="built_in">to</span> compute <span class="keyword">each</span> <span class="built_in">split</span> <span class="keyword">on</span> (<span class="title">e</span>.<span class="title">g</span>. <span class="title">block</span> <span class="title">locations</span> <span class="title">for</span> <span class="title">an</span> <span class="title">HDFS</span> <span class="title">file</span>)</span><br><span class="line">（可选项）一组最优的块的位置列表  表示数据的本地性和数据位置最优</span><br><span class="line">spark在进行任务分配的时候，它会优先考虑存有数据的节点来计算任务,避免出现大量的网络请求。</span><br></pre></td></tr></table></figure>
+<h4 id="3、创建RDD"><a href="#3、创建RDD" class="headerlink" title="3、创建RDD"></a>3、创建RDD</h4><ul>
+<li>1、通过一个已经存在scala集合去创建<ul>
+<li>sc.parallelize(List(1,2,3,4))</li>
+</ul>
+</li>
+<li>2、读取外部数据源去创建<ul>
+<li>val rdd1=sc.textFile(“/words.txt”)</li>
+</ul>
+</li>
+<li>3、通过一个rdd调用对应的方法生成一个新的rdd<ul>
+<li>val rdd2=rdd1.flatMap(_.split(“ “))</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、RDD的算子分类"><a href="#4、RDD的算子分类" class="headerlink" title="4、RDD的算子分类"></a>4、RDD的算子分类</h4><ul>
+<li>1、transformation（转换算子）<ul>
+<li>可以把一个rdd转换生成一个新的rdd，它是延迟加载，不会立即触发整个任务的运行</li>
+<li>它会记录下rdd上面的转换操作行为</li>
+<li>比如<ul>
+<li>flatMap  map filter union intersection  reduceByKey sortBy</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2、action (动作)<ul>
+<li>它会触发任务真正的运行</li>
+<li>collect saveAsTextFile</li>
+</ul>
+</li>
+</ul>
+<h4 id="5、RDD的依赖关系"><a href="#5、RDD的依赖关系" class="headerlink" title="5、RDD的依赖关系"></a>5、RDD的依赖关系</h4><ul>
+<li>1、窄依赖</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">窄依赖指的是每一个父RDD的Partition最多被子RDD的一个Partition使用</span><br><span class="line">总结：窄依赖可以形象的比喻为独生子女</span><br><span class="line"></span><br><span class="line">e.g：flatMap  map <span class="built_in"> filter </span><span class="built_in">..</span>.</span><br><span class="line">窄依赖不会产生shuffle</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、宽依赖</li>
+</ul>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">宽依赖指的是多个子RDD的<span class="keyword">Partition</span>会依赖同一个父RDD的<span class="keyword">Partition</span></span><br><span class="line">总结：宽依赖可以形象的比喻为超生</span><br><span class="line"></span><br><span class="line">e.g：reduceByKey  gruopByKey  sortBy  join</span><br><span class="line">宽依赖会产生shuffle</span><br></pre></td></tr></table></figure>
+<h4 id="6、Lineage（血统-继承关系）"><a href="#6、Lineage（血统-继承关系）" class="headerlink" title="6、Lineage（血统,继承关系）"></a>6、Lineage（血统,继承关系）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">血统：它会记录下在rdd上的一系列操作行为，后期某个rdd的分区数据丢失之后，可以通过血统这层关系重新计算恢复得到</span><br></pre></td></tr></table></figure>
+<h4 id="7、RDD的缓存机制"><a href="#7、RDD的缓存机制" class="headerlink" title="7、RDD的缓存机制"></a>7、RDD的缓存机制</h4><h5 id="7-1-什么是rdd的缓存机制"><a href="#7-1-什么是rdd的缓存机制" class="headerlink" title="7.1 什么是rdd的缓存机制?"></a>7.1 什么是rdd的缓存机制?</h5><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以把一个rdd的结果数据进行缓存，缓存之后后续有其他的<span class="keyword">job</span>需要依赖于前面rdd的结果数据，可以直接从缓存中获取得到，避免重新计算</span><br></pre></td></tr></table></figure>
+<h5 id="7-2-如何设置缓存"><a href="#7-2-如何设置缓存" class="headerlink" title="7.2 如何设置缓存?"></a>7.2 如何设置缓存?</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">对rdd设置缓存有2中方式：第一种:<span class="keyword">cache</span>  第二种:persist</span><br><span class="line">两者的区别：</span><br><span class="line"><span class="keyword">cache</span>默认是把数据缓存在内存中，其本质就是调用persist方法，默认的存储级别就是MEMOEY_ONLY(只在内存中保存一份)</span><br><span class="line">persist中有丰富的缓存级别可供选择，可以把数据缓存在磁盘中，这些缓存级别都被定义在StorageLevel <span class="keyword">object</span>中</span><br><span class="line">这<span class="number">2</span>个方法并不是立即调用就触发缓存操作，后面需要有一个<span class="keyword">action</span>操作才可以</span><br></pre></td></tr></table></figure>
+<h5 id="7-3-清除缓存"><a href="#7-3-清除缓存" class="headerlink" title="7.3 清除缓存"></a>7.3 清除缓存</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">rdd</span><span class="selector-class">.unpersist</span>方法可以将缓存中的数据移除掉</span><br></pre></td></tr></table></figure>
+<h5 id="7-4-什么时候设置缓存"><a href="#7-4-什么时候设置缓存" class="headerlink" title="7.4 什么时候设置缓存"></a>7.4 什么时候设置缓存</h5><ul>
+<li>1、一个rdd后期被多次使用</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">val rdd2=rdd1.flatMap(<span class="symbol">_</span>.<span class="built_in">split</span>(<span class="string">" "</span>)</span><br><span class="line">val rdd3=rdd1.<span class="built_in">map</span>(<span class="symbol">_</span>.<span class="built_in">split</span>(<span class="string">" "</span>))</span><br><span class="line">rdd1使用了很多次，后面就可以对rdd1设置缓存，后面的job就可以直接从缓存中获取得到。避免重新计算</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、一个rdd的结果获取得到来之不易</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val rdd1=sc.textFile(<span class="string">"/words.txt"</span>)<span class="selector-class">.xxx</span><span class="selector-class">.xxxx</span><span class="selector-class">.xxxx</span><span class="selector-class">.xxxx</span><span class="selector-class">.xxxx</span><span class="selector-class">.xxx</span><span class="selector-class">.xxxx</span><span class="selector-class">.xxx</span>.....</span><br><span class="line">rdd1经过大量的转换操作或者是计算逻辑比较复杂最后得到不容易，这个时候就可以对rdd1设置缓存</span><br></pre></td></tr></table></figure>
+<h4 id="8、DAG有向无环图和划分stage"><a href="#8、DAG有向无环图和划分stage" class="headerlink" title="8、DAG有向无环图和划分stage"></a>8、DAG有向无环图和划分stage</h4><ul>
+<li>DAG有向无环图</li>
+</ul>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DAG就是按照rdd一系列的操作转换最后就形成一个有方向无闭环的图，这里的方向就是按照rdd的操作顺序，后期可以针对于这个有向无环图<span class="comment">(按照款窄依赖)</span>进行stage的划分，这里的stage我们称之为不同的调度阶段</span><br></pre></td></tr></table></figure>
+<h4 id="9、spark任务调度流程"><a href="#9、spark任务调度流程" class="headerlink" title="9、spark任务调度流程"></a>9、spark任务调度流程</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）Driver会运行客户端main方法中的代码，代码就会构建SparkContext对象，在构建SparkContext对象中，会创建DAGScheduler和TaskScheduler，然后按照rdd一系列的操作生成DAG有向无环图。最后把DAG有向无环图提交给DAGScheduler。</span><br><span class="line">（<span class="number">2</span>）DAGScheduler拿到DAG有向无环图后，按照宽依赖进行stage的划分，这个时候会产生很多个stage，每一个stage中都有很多可以并行运行的<span class="keyword">task</span>，把每一个stage中这些<span class="keyword">task</span>封装在一个taskSet集合中，最后提交给TaskScheduler。</span><br><span class="line">（<span class="number">3</span>）TaskScheduler拿到taskSet集合后，依次遍历每一个<span class="keyword">task</span>，最后提交给worker节点的exectuor进程中。<span class="keyword">task</span>就以线程的方式运行在worker节点的executor进程中。</span><br></pre></td></tr></table></figure>
+<h4 id="10、spark的容错机制之checkpoint"><a href="#10、spark的容错机制之checkpoint" class="headerlink" title="10、spark的容错机制之checkpoint"></a>10、spark的容错机制之checkpoint</h4><h5 id="10-1-什么是checkpoint"><a href="#10-1-什么是checkpoint" class="headerlink" title="10.1 什么是checkpoint"></a>10.1 什么是checkpoint</h5><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rdd设置缓存有<span class="number">2</span>种方式：<span class="keyword">cache</span>和persist</span><br><span class="line"></span><br><span class="line">（<span class="number">1</span>）<span class="keyword">cache</span>:默认是把数据缓存在内存中，其本质是调用persist方法。后期操作起来速度快，由于一些原因导致进程挂掉了或者是服务器挂掉了，内存中的数据也就丢失。数据的丢失风险的比较高。</span><br><span class="line"></span><br><span class="line">（<span class="number">2</span>）persist：可以把数据保存在本地磁盘，后期操作起来比<span class="keyword">cache</span>要慢一点，但是也不是特别安全，比如说磁盘损坏，或者是某个系统管理员由于误操作把数据删除了，数据也有丢失的风险。</span><br><span class="line"></span><br><span class="line">checkpoint:它提供了一个相对而言更加可靠的数据持久化方式，它可以把数据保存在分布式文件系统中，也就是hadoop中的HDFS.可以通过hdfs高容错来最大程度保证数据不丢失。</span><br></pre></td></tr></table></figure>
+<h5 id="10-2-如何设置checkpoint"><a href="#10-2-如何设置checkpoint" class="headerlink" title="10.2 如何设置checkpoint"></a>10.2 如何设置checkpoint</h5><ul>
+<li>1、首先使用sparkcontext对象设置一个checkpoint目录<ul>
+<li>sc.setCheckpointDir(“hdfs上的路径”)</li>
+</ul>
+</li>
+<li>2、使用rdd调用checkpoint方法<ul>
+<li>rdd1.checkpoint</li>
+</ul>
+</li>
+<li>3、需要一个action来触发任务的运行<ul>
+<li>rdd1.collect</li>
+</ul>
+</li>
+</ul>
+<h5 id="12-3-cache、persist、checkpoint区别"><a href="#12-3-cache、persist、checkpoint区别" class="headerlink" title="12.3 cache、persist、checkpoint区别"></a>12.3 cache、persist、checkpoint区别</h5><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cache、persist可以对rdd的数据进行缓存，后面需要有对应的action操作，才会触发缓存的执行。它不会改变rdd的血统关系。不会产生新的<span class="keyword">job</span>，你有几个action,就对应有几个<span class="keyword">job</span></span><br><span class="line"></span><br><span class="line">checkpoint:对需要做checkpoint操作的rdd调用checkpoint方法，后面需要有对应的action操作。它会改变的rdd的血统关系，对当前需要做checkpoint操作的rdd最后调用了一个action，一个action就是一个<span class="keyword">job</span>，你在执行action操作的时候，首先会有一个<span class="keyword">job</span>去运行。这个<span class="keyword">job</span>运行完成之后，它会再次启动一个新的<span class="keyword">job</span>来运行checkpoint操作，也就是说这一块它会有<span class="number">2</span>个<span class="keyword">job</span>去跑任务</span><br></pre></td></tr></table></figure>
+<h5 id="12-4-数据丢失之后恢复顺序"><a href="#12-4-数据丢失之后恢复顺序" class="headerlink" title="12.4 数据丢失之后恢复顺序"></a>12.4 数据丢失之后恢复顺序</h5><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）先去<span class="keyword">cache</span>中看看有没有设置缓存，如果<span class="keyword">cache</span>中存在就直接从内存中获取得到</span><br><span class="line">（<span class="number">2</span>）如果<span class="keyword">cache</span>不存在，接下来看看有没有做checkpoint操作，如果有checpoint操作，这个时候就直接从磁盘中获取得到，如果也没有做checkpoint</span><br><span class="line">（<span class="number">3</span>）只能够通过血统重新计算恢复得到</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">------本文结束 <i class="fa fa-paw"></i> 感谢阅读------</div>
+    
+</div>
+		
+	</div>
+	
+	
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算框架/" rel="tag"># 计算框架</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/RDD/" rel="tag"># RDD</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/09/2018-11-09-HashCode源码解析/" rel="next" title="HashCode源码解析">
+                <i class="fa fa-chevron-left"></i> HashCode源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgxNS8xNzM0MA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/hualvl.jpg" alt="Long">
+            
+              <p class="site-author-name" itemprop="name">Long</p>
+              <p class="site-description motion-element" itemprop="description">知识的孤岛越大,无知的海岸线越长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/DemonsIT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、学习目标"><span class="nav-number">1.</span> <span class="nav-text">1、学习目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、RDD概述"><span class="nav-number">2.</span> <span class="nav-text">2、RDD概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-RDD是什么"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 RDD是什么</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-RDD的五大属性"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 RDD的五大属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、创建RDD"><span class="nav-number">3.</span> <span class="nav-text">3、创建RDD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、RDD的算子分类"><span class="nav-number">4.</span> <span class="nav-text">4、RDD的算子分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、RDD的依赖关系"><span class="nav-number">5.</span> <span class="nav-text">5、RDD的依赖关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、Lineage（血统-继承关系）"><span class="nav-number">6.</span> <span class="nav-text">6、Lineage（血统,继承关系）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、RDD的缓存机制"><span class="nav-number">7.</span> <span class="nav-text">7、RDD的缓存机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#7-1-什么是rdd的缓存机制"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 什么是rdd的缓存机制?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-2-如何设置缓存"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 如何设置缓存?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-3-清除缓存"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 清除缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-4-什么时候设置缓存"><span class="nav-number">7.4.</span> <span class="nav-text">7.4 什么时候设置缓存</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、DAG有向无环图和划分stage"><span class="nav-number">8.</span> <span class="nav-text">8、DAG有向无环图和划分stage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、spark任务调度流程"><span class="nav-number">9.</span> <span class="nav-text">9、spark任务调度流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、spark的容错机制之checkpoint"><span class="nav-number">10.</span> <span class="nav-text">10、spark的容错机制之checkpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#10-1-什么是checkpoint"><span class="nav-number">10.1.</span> <span class="nav-text">10.1 什么是checkpoint</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-2-如何设置checkpoint"><span class="nav-number">10.2.</span> <span class="nav-text">10.2 如何设置checkpoint</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-3-cache、persist、checkpoint区别"><span class="nav-number">10.3.</span> <span class="nav-text">12.3 cache、persist、checkpoint区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-4-数据丢失之后恢复顺序"><span class="nav-number">10.4.</span> <span class="nav-text">12.4 数据丢失之后恢复顺序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Long</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">26.1k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("hV25kYrvWpmtMz1AOBVxL9NF-gzGzoHsz", "cS58GqXTpEG66XqE22xcVWXV");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
