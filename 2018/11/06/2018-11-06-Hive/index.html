@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="花驴">
 <meta property="og:description" content="1. Hive简介Hive是基于Hadoop的一个数据仓库工具,可以将结构化的数据文件映射为一张数据库表,并提供类SQL的查询功能,其本质是将SQL转换成MapReduce的任务进行运算,底层由HDFS来提供数据的存储. 2. 特点 可扩展:Hive可自由的扩展集群的规模,一般情况下不需要重启服务 延展性:Hive支持用户根据需求来自定义函数 容错性:节点出现问题时SQL仍可完成执行(依赖于Had">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-06T09:14:23.541Z">
+<meta property="og:updated_time" content="2018-11-10T01:37:27.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据仓库工具--Hive">
 <meta name="twitter:description" content="1. Hive简介Hive是基于Hadoop的一个数据仓库工具,可以将结构化的数据文件映射为一张数据库表,并提供类SQL的查询功能,其本质是将SQL转换成MapReduce的任务进行运算,底层由HDFS来提供数据的存储. 2. 特点 可扩展:Hive可自由的扩展集群的规模,一般情况下不需要重启服务 延展性:Hive支持用户根据需求来自定义函数 容错性:节点出现问题时SQL仍可完成执行(依赖于Had">
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-06T17:14:23+08:00">
-                2018-11-06
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-10T09:37:27+08:00">
+                2018-11-10
               </time>
             
           </span>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.1k 字
+                  3.2k 字
                 </span>
               
 
@@ -519,15 +519,21 @@
 <h3 id="5-4-分区表-分桶表"><a href="#5-4-分区表-分桶表" class="headerlink" title="5.4 分区表,分桶表"></a>5.4 分区表,分桶表</h3><ul>
 <li>分区表:<ul>
 <li>关键字:partitioned by(名称 类型)</li>
-<li>分完后的是文件夹,便于局部查询</li>
+<li>注:分区的名称不可以和表中的字段名称重复,否则会报以下错误:</li>
 </ul>
 </li>
 </ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">报错信息：FAILED: SemanticException [<span class="builtin-name">Error</span> 10035]: Column repeated <span class="keyword">in</span> partitioning columns</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分完后的是文件夹,便于局部查询</li>
+</ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> score(s_id <span class="keyword">string</span>,c_id <span class="keyword">string</span>, s_score <span class="built_in">int</span>) partitioned <span class="keyword">by</span> (<span class="keyword">month</span> <span class="keyword">string</span>) <span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">'\t'</span>;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>分桶表:<ul>
+<li>分桶表(更细粒度的数据范围划分):<ul>
 <li>关键字:clustered by(字段) into 3 buckets</li>
+<li>注:分桶的字段必须是表中已有的字段</li>
 <li>分的是文件,即将一个文件拆分为多个小文件</li>
+<li>使用用户id来确定如何划分桶(Hive使用对值进行哈希并将结果除于桶的个数取余数的方式进行分桶)</li>
 </ul>
 </li>
 </ul>
@@ -945,7 +951,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">32.2k</span>
+    <span title="Site words total count">32.3k</span>
   
 </div>
 
