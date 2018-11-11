@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="整合 共生,Spark Hive SQL Yarn,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="知识的孤岛越大,无知的海岸线越长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="花驴">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
+<meta name="keywords" content="整合 共生,Spark Hive SQL Yarn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark与其它平台的整合">
+<meta property="og:url" content="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/index.html">
 <meta property="og:site_name" content="花驴">
-<meta property="og:description" content="知识的孤岛越大,无知的海岸线越长">
+<meta property="og:description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-11T16:28:45.551Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="花驴">
-<meta name="twitter:description" content="知识的孤岛越大,无知的海岸线越长">
+<meta name="twitter:title" content="Spark与其它平台的整合">
+<meta name="twitter:description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/">
 
 
 
 
 
-  <title>归档 | 花驴</title>
+  <title>Spark与其它平台的整合 | 花驴</title>
   
 
 
@@ -143,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	
 	<a href="https://github.com/DemonsIT"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
@@ -288,391 +290,242 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/hualvl.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花驴">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Spark与其它平台的整合</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T00:28:45+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-12T00:28:45+08:00">
+                2018-11-12
+              </time>
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 18 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2018/11/12/2018-11-11-Spark与其它平台的整合/" class="leancloud_visitors" data-flag-title="Spark与其它平台的整合">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/12/2018-11-11-Spark与其它平台的整合/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">Spark与其它平台的整合</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  320 字
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-12T00:28:45+08:00" content="2018-11-12">
-          11-12
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/11/2018-11-10-Flume补充知识点/" itemprop="url">
-              
-                <span itemprop="name">Flume拾遗</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-11T00:27:31+08:00" content="2018-11-11">
-          11-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09-Flume学习笔记/" itemprop="url">
-              
-                <span itemprop="name">Flume学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T23:54:31+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09-Spark学习笔记(四)/" itemprop="url">
-              
-                <span itemprop="name">Spark学习笔记(四)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T17:57:24+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        <h2 id="Hive-On-Spark"><a href="#Hive-On-Spark" class="headerlink" title="Hive On Spark"></a>Hive On Spark</h2><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hive是Hadoop标准的最早的SQL查询引擎.</span><br><span class="line">我们使用Hive的查询语句,但在底层运行的是Spark <span class="keyword">Job</span></span><br><span class="line">所有的Hive的优势得以保留,缺点得以弥补</span><br><span class="line">Hive SQL比SparkSQL好用且支持更丰富的功能</span><br></pre></td></tr></table></figure>
+<h2 id="SparkSQL-On-Hive-常用"><a href="#SparkSQL-On-Hive-常用" class="headerlink" title="SparkSQL On Hive(常用)"></a>SparkSQL On Hive(常用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一个hiv表中有哪些字段,还有每一个hive表的数据的存放目录,后期不再使用hivesql底层运行MR,而是改成了spark任务来提升速度</span><br><span class="line">它默认使用Hive的元数据来管理它的元数据</span><br></pre></td></tr></table></figure>
+<h2 id="Spark-On-Yarn-常用"><a href="#Spark-On-Yarn-常用" class="headerlink" title="Spark On Yarn(常用)"></a>Spark On Yarn(常用)</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">是把Spark的任务提交到Yarn中去运行,由Yarn中的老大ResourceManager去分配资源和负责调度</span><br><span class="line">有两种模式:</span><br><span class="line">Cluster模式:</span><br><span class="line">	集群模式,即Driver运行在ResourceManager上,任务需要的数据提交到RM上去运行并得到最终的结果,客户端提交任务以后挂掉不影响任务的执行和结果的生成</span><br><span class="line"></span><br><span class="line"><span class="built_in">Client</span>模式:</span><br><span class="line">	客户端模式,即Driver运行在<span class="built_in">Client</span>上,任务需要的数据在<span class="built_in">Client</span>和Yarn之间来回流动,需要Spark客户端和Yarn时刻保持通讯,否则无法得到结果</span><br></pre></td></tr></table></figure>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09-Spark学习笔记(三)/" itemprop="url">
-              
-                <span itemprop="name">Spark学习笔记(三)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T17:08:29+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09-Spark学习笔记(二)/" itemprop="url">
-              
-                <span itemprop="name">Spark学习笔记(二)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:32:25+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/09/2018-11-09-HashCode源码解析/" itemprop="url">
-              
-                <span itemprop="name">HashCode源码解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-09T14:10:10+08:00" content="2018-11-09">
-          11-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/06/2018-11-06-Hive/" itemprop="url">
-              
-                <span itemprop="name">数据仓库工具--Hive</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-06T15:21:30+08:00" content="2018-11-06">
-          11-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/06/2018-11-06-数据库VS数据仓库/" itemprop="url">
-              
-                <span itemprop="name">数据库VS数据仓库</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-06T15:19:29+08:00" content="2018-11-06">
-          11-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/11/04/2018-11-04-Spark学习笔记(一)/" itemprop="url">
-              
-                <span itemprop="name">Spark学习笔记(一)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-11-04T21:45:59+08:00" content="2018-11-04">
-          11-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:18px;">------本文结束 <i class="fa fa-paw"></i> 感谢阅读------</div>
+    
+</div>
+		
+	</div>
+	
+	
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/整合-共生/" rel="tag"><i class="fa fa-tag"></i>
+
+ 整合 共生</a>
+          
+            <a href="/tags/Spark-Hive-SQL-Yarn/" rel="tag"><i class="fa fa-tag"></i>
+
+ Spark Hive SQL Yarn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/11/2018-11-10-Flume补充知识点/" rel="next" title="Flume拾遗">
+                <i class="fa fa-chevron-left"></i> Flume拾遗
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -680,6 +533,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDgxNS8xNzM0MA=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -700,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -773,6 +644,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-On-Spark"><span class="nav-number">1.</span> <span class="nav-text">Hive On Spark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SparkSQL-On-Hive-常用"><span class="nav-number">2.</span> <span class="nav-text">SparkSQL On Hive(常用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-On-Yarn-常用"><span class="nav-number">3.</span> <span class="nav-text">Spark On Yarn(常用)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -927,6 +814,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -955,6 +846,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
