@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="框架,大数据,">
+  <meta name="keywords" content="数据库,NoSQL Hbase,HDFS Zookeeper,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Hadoop复习回顾">
-<meta name="keywords" content="框架,大数据">
+<meta name="description" content="1. Hbase是什么? 非关系型数据库 高可用,高性能,列存储,可伸缩,实时读写 基于HDFS存储数据 依靠横向扩展增加计算和存储能力 不支持复杂的事务(行级的事务) 只能通过主键和主键的范围查找数据  2. Hbase中表的特征 大-可以存储大量的数据 无模式-不同的行可以有不同的列,不同的列可以包含不同的字段 面向列存储 稀疏-其中的null值不占用实际的空间 数据的多版本-单个字段中可以存">
+<meta name="keywords" content="数据库,NoSQL Hbase,HDFS Zookeeper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop">
-<meta property="og:url" content="http://yoursite.com/2018/11/02/2018-11-01-Hadoop/index.html">
+<meta property="og:title" content="Hbase学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/12/2018-11-12-Hbase学习笔记/index.html">
 <meta property="og:site_name" content="花驴">
-<meta property="og:description" content="Hadoop复习回顾">
+<meta property="og:description" content="1. Hbase是什么? 非关系型数据库 高可用,高性能,列存储,可伸缩,实时读写 基于HDFS存储数据 依靠横向扩展增加计算和存储能力 不支持复杂的事务(行级的事务) 只能通过主键和主键的范围查找数据  2. Hbase中表的特征 大-可以存储大量的数据 无模式-不同的行可以有不同的列,不同的列可以包含不同的字段 面向列存储 稀疏-其中的null值不占用实际的空间 数据的多版本-单个字段中可以存">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-02T16:08:32.763Z">
+<meta property="og:updated_time" content="2018-11-12T09:26:19.412Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop">
-<meta name="twitter:description" content="Hadoop复习回顾">
+<meta name="twitter:title" content="Hbase学习笔记">
+<meta name="twitter:description" content="1. Hbase是什么? 非关系型数据库 高可用,高性能,列存储,可伸缩,实时读写 基于HDFS存储数据 依靠横向扩展增加计算和存储能力 不支持复杂的事务(行级的事务) 只能通过主键和主键的范围查找数据  2. Hbase中表的特征 大-可以存储大量的数据 无模式-不同的行可以有不同的列,不同的列可以包含不同的字段 面向列存储 稀疏-其中的null值不占用实际的空间 数据的多版本-单个字段中可以存">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/02/2018-11-01-Hadoop/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/12/2018-11-12-Hbase学习笔记/">
 
 
 
 
 
-  <title>Hadoop | 花驴</title>
+  <title>Hbase学习笔记 | 花驴</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/2018-11-01-Hadoop/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/2018-11-12-Hbase学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Long">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hadoop</h1>
+          <h1 class="post-title" itemprop="name headline">Hbase学习笔记</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T11:38:00+08:00">
-                2018-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T17:26:19+08:00">
+                2018-11-12
               </time>
             
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-03T00:08:32+08:00">
-                2018-11-03
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-12T17:26:19+08:00">
+                2018-11-12
               </time>
             
           </span>
@@ -385,7 +385,7 @@
 
           
           
-             <span id="/2018/11/02/2018-11-01-Hadoop/" class="leancloud_visitors" data-flag-title="Hadoop">
+             <span id="/2018/11/12/2018-11-12-Hbase学习笔记/" class="leancloud_visitors" data-flag-title="Hbase学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k 字
+                  1.3k 字
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -447,119 +447,93 @@
       
 
       
-        <h1 id="Hadoop复习回顾"><a href="#Hadoop复习回顾" class="headerlink" title="Hadoop复习回顾"></a>Hadoop复习回顾</h1><a id="more"></a>
-<h2 id="1-HDFS分布式文件存储系统"><a href="#1-HDFS分布式文件存储系统" class="headerlink" title="1. HDFS分布式文件存储系统"></a>1. HDFS分布式文件存储系统</h2><h3 id="1-1-HDFS的架构"><a href="#1-1-HDFS的架构" class="headerlink" title="1.1 HDFS的架构"></a>1.1 HDFS的架构</h3><ul>
-<li>主从架构,可以配置主节点的主备架构</li>
-<li>冷备份 热备份</li>
-<li>HDFS的元数据:<ul>
-<li>fsimage:元数据镜像文件,较为完整的一份元数据</li>
-<li>edits:元数据的操作日志(一小部分元数据,用作缓冲)</li>
-<li>namenode内存中存储的是:fsimage+edits</li>
-<li>SecondaryNameNdoe:定时定量合并fsimage和edits</li>
+        <h2 id="1-Hbase是什么"><a href="#1-Hbase是什么" class="headerlink" title="1. Hbase是什么?"></a>1. Hbase是什么?</h2><ul>
+<li>非关系型数据库</li>
+<li>高可用,高性能,列存储,可伸缩,实时读写</li>
+<li>基于HDFS存储数据</li>
+<li>依靠横向扩展增加计算和存储能力</li>
+<li>不支持复杂的事务(行级的事务)</li>
+<li>只能通过主键和主键的范围查找数据</li>
+</ul>
+<h2 id="2-Hbase中表的特征"><a href="#2-Hbase中表的特征" class="headerlink" title="2. Hbase中表的特征"></a>2. Hbase中表的特征</h2><ul>
+<li>大-可以存储大量的数据</li>
+<li>无模式-不同的行可以有不同的列,不同的列可以包含不同的字段</li>
+<li>面向列存储</li>
+<li>稀疏-其中的null值不占用实际的空间</li>
+<li>数据的多版本-单个字段中可以存储多个不同的值,每个值对应一个唯一的版本(时间戳)</li>
+<li>数据类型单一-Hbase表中的数据都是以字节数组的形式存储</li>
+</ul>
+<h2 id="3-Hbase的集群结构"><a href="#3-Hbase的集群结构" class="headerlink" title="3. Hbase的集群结构"></a>3. Hbase的集群结构</h2><ul>
+<li>Client:Hbase客户端的入口/接口</li>
+<li>Zookeeper:管理Hbase的元数据,监控HMaster和HRegionServer,保存Hbase表的寻址入口</li>
+<li>HMaster:Hbase集群的老大,负责表的创建和删除,为HRegionServer分配Region,实现HRegionServer的负载均衡</li>
+<li>HRegionServer:小弟,接收客户端的读写请求,管理对应的region,切分在运行过程中膨胀的region<ul>
+<li>注:HRegionServer与Region的关系是一对一或一对多</li>
+</ul>
+</li>
+<li>region:Hbase中分布式存储的最小单元,依赖于HDFS,并不是物理存储的最小单元</li>
+</ul>
+<h2 id="4-Hbase-Shell"><a href="#4-Hbase-Shell" class="headerlink" title="4. Hbase Shell"></a>4. Hbase Shell</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">创建表+列族</span></span><br><span class="line">create 'user','a','b'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看Hbase中的所有表</span></span><br><span class="line">list</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看指定表的描述信息</span></span><br><span class="line">describe 'user'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">修改表的属性:名称,值,版本,列族等</span></span><br><span class="line">alter 'user',xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">添加数据</span></span><br><span class="line">put 'user','00001','a:name','hualvl'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查询表中的各个数据</span></span><br><span class="line">get 'user','00001',&#123;xxx&#125;,...</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除数据</span></span><br><span class="line">delete 'user','00001','b:memory'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除表</span></span><br><span class="line">disable 'user'</span><br><span class="line">drop 'user'</span><br></pre></td></tr></table></figure>
+<h2 id="5-Hbase的内部原理"><a href="#5-Hbase的内部原理" class="headerlink" title="5. Hbase的内部原理"></a>5. Hbase的内部原理</h2><ul>
+<li>创建表的时候指定列族(1-3个为宜)</li>
+<li>一个列族对应一个store(可以理解为一个存放数据的小仓库)</li>
+<li>默认一张表刚开始只有一个region</li>
+<li>随着region的不断变大到10GB时,region一分为二,同时对应的rowkey也按顺序划分</li>
+<li>每个store中都有一个memstore(内存缓冲区)<ul>
+<li>若memstore中的数据达到128MB或者时间达到1个小时,其中的数据会写到磁盘</li>
+</ul>
+</li>
+<li>写到磁盘中的文件称为storeFile,一个一个的storeFile</li>
+<li>storeFile最终会以HFile的数据格式保存到HDFS文件系统中</li>
+</ul>
+<h2 id="6-Hbase的寻址机制"><a href="#6-Hbase的寻址机制" class="headerlink" title="6. Hbase的寻址机制"></a>6. Hbase的寻址机制</h2><h3 id="6-1-二级索引"><a href="#6-1-二级索引" class="headerlink" title="6.1 二级索引"></a>6.1 二级索引</h3><ul>
+<li>后期由于Hbase中存储的数据量过于庞大,普通的数据查找方式已无法满足要求</li>
+<li>通过索引查找数据比直接查找数据本身速度更快,性能更高</li>
+<li>Hbase中存储的数据的索引映射成一张二级索引表:<ul>
+<li>记录Hbase中每个region的起始rowkey,结束rowkey和该region的id,以及被管理的regionServser的id</li>
+</ul>
+</li>
+<li>二级索引表也会越来越大,故向上抽取生成一级索引表:<ul>
+<li>记录二级索引表中每个region的起始rowkey,结束rowkey和该region的id,以及被管理的regionServer的id</li>
+</ul>
+</li>
+<li>Zookeeper集群保存了所有Hbase表的寻址入口</li>
+<li>在Zookeeper上有一个节点保存一级索引表位于哪一个regionServer所管理的region上</li>
+<li>客户端和Zookeeper进行通讯就可以通过一级,二级索引表快速查找Hbase中的数据</li>
+</ul>
+<h3 id="6-2-布隆过滤器"><a href="#6-2-布隆过滤器" class="headerlink" title="6.2 布隆过滤器"></a>6.2 布隆过滤器</h3><ul>
+<li>Hbase的二级索引机制只能查到数据的大概位置,如需精确的查到某一个字段中的值,还需要布隆过滤器的帮助</li>
+<li>布隆过滤器的作用就是预先记录了哪个storeFile保存了哪些数据,故可以有效的避免在不存在查找的数据的storeFile上查找数据的无用功,大大提高查找的效率</li>
+<li>使用布隆过滤器有一定的误差:它说数据没有在哪一个storeFile中,就肯定不在;但它说数据在哪一个storeFile中,该数据不一定在里面</li>
+<li>因为布隆过滤器利用的是rowkey取哈希值的方法记录每一条数据</li>
+<li>不同的数据有一定的概率会得到同样的哈希值,故该误差必定存在,但极小,是容许的</li>
+</ul>
+<h2 id="7-Hbase的rowkey设计"><a href="#7-Hbase的rowkey设计" class="headerlink" title="7. Hbase的rowkey设计"></a>7. Hbase的rowkey设计</h2><ul>
+<li>长度原则<ul>
+<li>设计rowkey的时候,长度不要太长,尽量越短越好,一般不要超过16个字节</li>
+<li>数据的持久化文件HFile是按照KeyValue存储的,如果rowkey过长,会很占地方,影响HFile的存储效率</li>
+<li>memstore将缓存部分数据(包含rowkey)到内存,若rowkey字段过长,内存的有效利用率就会降低,从而降低检索效率</li>
+</ul>
+</li>
+<li>唯一原则<ul>
+<li>每一条数据有且只能有一个对应的rowkey</li>
+</ul>
+</li>
+<li>散列原则<ul>
+<li>保证rowkey高位随机,如此一来,数据就会均匀的流入到不同的region中,实现region的负载均衡</li>
+<li>若rowkey设计不合理,会导致regionServer出现热点问题</li>
+<li>热点问题的解决方案:<ul>
+<li>加盐:在rowkey前面加上一个随机数</li>
+<li>哈希:将对应的字段进行哈希后存储</li>
+<li>反转:可以把常改动的结果放在rowkey的高位,把不常改动的结果放在低位</li>
 </ul>
 </li>
 </ul>
-<h3 id="1-2-HDFS写数据流程"><a href="#1-2-HDFS写数据流程" class="headerlink" title="1.2 HDFS写数据流程"></a>1.2 HDFS写数据流程</h3><ul>
-<li>关键字:RPC 备份机制 机架感知 ACK消息不丢失机制 pipeline管道 packet(64KB) block块</li>
-</ul>
-<h3 id="1-3-HDFS读数据流程"><a href="#1-3-HDFS读数据流程" class="headerlink" title="1.3 HDFS读数据流程"></a>1.3 HDFS读数据流程</h3><ul>
-<li>关键字:RPC block块 集群拓扑结构(最近原则) Socker-Stream流 read方法读文件</li>
-</ul>
-<h3 id="1-4-HDFS中的JavaAPI"><a href="#1-4-HDFS中的JavaAPI" class="headerlink" title="1.4 HDFS中的JavaAPI"></a>1.4 HDFS中的JavaAPI</h3><ul>
-<li>HDFS上文件的增删改查</li>
-</ul>
-<h3 id="1-5-案例"><a href="#1-5-案例" class="headerlink" title="1.5 案例"></a>1.5 案例</h3><ul>
-<li>Shell定时采集数据上传到HDFS</li>
-</ul>
-<h2 id="2-MapReduce分布式计算框架"><a href="#2-MapReduce分布式计算框架" class="headerlink" title="2. MapReduce分布式计算框架"></a>2. MapReduce分布式计算框架</h2><h3 id="2-1-InputFormat"><a href="#2-1-InputFormat" class="headerlink" title="2.1 InputFormat"></a>2.1 InputFormat</h3><ul>
-<li>所有的文件读入到MapReduce中进行处理前都需要继承InputFormat类,该类对读入的文件进行逻辑切分为块,默认每个块的大小是一个block块的大小,也就是128MB</li>
-<li>若input的文件非常大,可将HDFS中的block块的大小设置为256MB或512MB等</li>
-<li>注:若切分后最后剩余的文件大小&lt;=128* 1.1=140.8MB,则该文件将会被规划成一个块而不是两个块</li>
-</ul>
-<h3 id="2-2-MapTask端的工作机制"><a href="#2-2-MapTask端的工作机制" class="headerlink" title="2.2 MapTask端的工作机制"></a>2.2 MapTask端的工作机制</h3><ul>
-<li>按行读取</li>
-<li>默认使用HashPartitioner对K2进行分区</li>
-<li>将分区后的结果写入buffer进行初步局部排序(环型缓冲区,默认100MB,阈值为80%,溢出将写入到磁盘)</li>
-<li>当MapTask任务结束时,将溢出的所有小文件合并(merge)成一个中间数据文件,其中包含多个分区及分区中的数据</li>
-</ul>
-<h3 id="2-3-shuffle的过程"><a href="#2-3-shuffle的过程" class="headerlink" title="2.3 shuffle的过程"></a>2.3 shuffle的过程</h3><ul>
-<li>MapTask产生输出开始到ReduceTask取得数据作为输入之前开始的阶段</li>
-<li>Collect阶段:将读取的数据写入环型缓冲区</li>
-<li>Spill阶段:排序-溢出-写入磁盘</li>
-<li>Merge阶段:一个MapTask只能产生一个中间数据文件</li>
-<li>Copy阶段:ReduceTask到中间数据文件中领取数据自己的那一部分</li>
-<li>Merge阶段:ReduceTask对拉取过来的文件进行合并</li>
-<li>Sort阶段:对合并后的文件进行整体排序</li>
-<li>可设置shuffle中的缓冲区的大小以提高MapReduce的执行效率</li>
-<li>数据压缩机制:<ul>
-<li>利用代码实现在map阶段的数据压缩(推荐使用snappy压缩算法)</li>
-<li>配置mapred-site.xml对mapreduce全局数据进行压缩(snappy)</li>
-<li>优点:节约磁盘空间,加速数据在磁盘和网络中的传输</li>
+</li>
+<li>时间戳反转<ul>
+<li>e.g:123456789 ————&gt;  987654321</li>
 </ul>
 </li>
-</ul>
-<h3 id="2-4-ReduceTask端的工作机制"><a href="#2-4-ReduceTask端的工作机制" class="headerlink" title="2.4 ReduceTask端的工作机制"></a>2.4 ReduceTask端的工作机制</h3><ul>
-<li>拉取MapReduce阶段产生的中间数据文件中属于自己分区的那一块</li>
-<li>合并拉取的文件,排序…</li>
-<li>编辑业务逻辑,实现特定的需求</li>
-<li>若处理的数据分布不均匀,在Reduce阶段可能产生数据倾斜</li>
-<li>ReduceTask的数量可以手动直接设置以提高并行处理的速度</li>
-<li>每个Task的运行时间至少一分钟</li>
-</ul>
-<h3 id="2-5-OutputFormat"><a href="#2-5-OutputFormat" class="headerlink" title="2.5 OutputFormat"></a>2.5 OutputFormat</h3><ul>
-<li>主要用于描述输出数据的格式</li>
-<li>分为:行存储 和 列存储</li>
-</ul>
-<h3 id="2-6-特殊的组件-partitioner"><a href="#2-6-特殊的组件-partitioner" class="headerlink" title="2.6 特殊的组件:partitioner"></a>2.6 特殊的组件:partitioner</h3><ul>
-<li>主要作用是将K2/V2分片,每个reducer对应一个分片</li>
-<li>计算key.hashCode%(reducer个数)</li>
-<li>好处:可以随机地将整个key空间平均分发给每个reducer,同时确保不同的mapper产生的相同的key能被分发到同一个reducer</li>
-<li>自定义partitioner需要注意:必须提前知道分区的个数,确保map端和reduce端的数目一致</li>
-</ul>
-<h3 id="2-7-特殊的组件-combine"><a href="#2-7-特殊的组件-combine" class="headerlink" title="2.7 特殊的组件:combine"></a>2.7 特殊的组件:combine</h3><ul>
-<li>是==MapReuce的一种优化手段==,可减少map-reduce间的数据传输,提高IO性能</li>
-<li>作用是将map端的输出结果先做一次合并</li>
-<li>combiner是MR程序中Mapper和Reducer之外的一种组件</li>
-<li>combiner继承自Reducer</li>
-<li>combiner在map所在的节点运行</li>
-<li>一般来说,combiner和reducer做的是同样的事情</li>
-</ul>
-<h3 id="2-8-案例一-单词计数-WordCount"><a href="#2-8-案例一-单词计数-WordCount" class="headerlink" title="2.8 案例一:单词计数,WordCount"></a>2.8 案例一:单词计数,WordCount</h3><ul>
-<li>需要对谁排序就把谁定义成K2</li>
-</ul>
-<h3 id="2-9-案例二-手机上网流量统计-用MR进行排序-求出topN"><a href="#2-9-案例二-手机上网流量统计-用MR进行排序-求出topN" class="headerlink" title="2.9 案例二:手机上网流量统计,用MR进行排序,求出topN"></a>2.9 案例二:手机上网流量统计,用MR进行排序,求出topN</h3><ul>
-<li>SQL中的开窗函数</li>
-</ul>
-<h3 id="2-10-案例三-多表关联查询"><a href="#2-10-案例三-多表关联查询" class="headerlink" title="2.10 案例三:多表关联查询"></a>2.10 案例三:多表关联查询</h3><ul>
-<li>map端的join算法<ul>
-<li>原理阐述:适用于小表join大表的情况,把小表发送到map中,这样map就可以对读到的大表中的数据进行join并输出最终结果,可大大提高join操作的并发度,加快处理速度</li>
-</ul>
-</li>
-<li>reduce端的join算法<ul>
-<li>实现机制:通过将关联的条件作为map输出的key,将两张表中满足join条件的数据并携带数据来源的文件信息,发往同一个ReduceTask,在reduce中进行数据的串联</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-11-案例四-社交粉丝数据分析-求两个人的共同好友"><a href="#2-11-案例四-社交粉丝数据分析-求两个人的共同好友" class="headerlink" title="2.11 案例四:社交粉丝数据分析,求两个人的共同好友"></a>2.11 案例四:社交粉丝数据分析,求两个人的共同好友</h3><ul>
-<li>注意K2的选取和自定义逻辑的分组</li>
-<li>采用倒排索引的方法</li>
-</ul>
-<h2 id="3-Yarn分布式资源调度框架"><a href="#3-Yarn分布式资源调度框架" class="headerlink" title="3. Yarn分布式资源调度框架"></a>3. Yarn分布式资源调度框架</h2><h3 id="3-1-干什么的"><a href="#3-1-干什么的" class="headerlink" title="3.1 干什么的?"></a>3.1 干什么的?</h3><ul>
-<li>接收用户的任务请求</li>
-<li>分配,监控和管理计算机中的硬件资源</li>
-</ul>
-<h3 id="3-2-Yarn的工作流程"><a href="#3-2-Yarn的工作流程" class="headerlink" title="3.2 Yarn的工作流程"></a>3.2 Yarn的工作流程</h3><ul>
-<li>client–resourcemanager–container–ApplicationMaster–RM–container–nodemanager…</li>
-</ul>
-<h3 id="3-3-Yarn的调度器"><a href="#3-3-Yarn的调度器" class="headerlink" title="3.3 Yarn的调度器"></a>3.3 Yarn的调度器</h3><ul>
-<li>FIFO Scheduler:先进先出队列</li>
-<li>Capacity Scheduler:为每个组织分配专门的资源,Apache版本采用</li>
-<li>Fair Scheduler:公平调度器,动态分配资源,CDH版本采用</li>
-</ul>
-<h3 id="3-4-Yarn常用参数的配置"><a href="#3-4-Yarn常用参数的配置" class="headerlink" title="3.4 Yarn常用参数的配置"></a>3.4 Yarn常用参数的配置</h3><ul>
-<li>为每个container分配最小/最大内存</li>
-<li>为每个container分配的最小/最大虚拟内核个数</li>
-<li>NodeManager可分配的内存大小</li>
 </ul>
 
       
@@ -590,13 +564,17 @@
       
         <div class="post-tags">
           
-            <a href="/tags/框架/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/数据库/" rel="tag"><i class="fa fa-tag"></i>
 
- 框架</a>
+ 数据库</a>
           
-            <a href="/tags/大数据/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/NoSQL-Hbase/" rel="tag"><i class="fa fa-tag"></i>
 
- 大数据</a>
+ NoSQL Hbase</a>
+          
+            <a href="/tags/HDFS-Zookeeper/" rel="tag"><i class="fa fa-tag"></i>
+
+ HDFS Zookeeper</a>
           
         </div>
       
@@ -609,8 +587,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/01/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/12/2018-11-11-Spark与其它平台的整合/" rel="next" title="Spark与其它平台的整合">
+                <i class="fa fa-chevron-left"></i> Spark与其它平台的整合
               </a>
             
           </div>
@@ -618,10 +596,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/02/2018-11-02-Scala基础/" rel="prev" title="Scala学习笔记">
-                Scala学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -770,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop复习回顾"><span class="nav-number">1.</span> <span class="nav-text">Hadoop复习回顾</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HDFS分布式文件存储系统"><span class="nav-number">1.1.</span> <span class="nav-text">1. HDFS分布式文件存储系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-HDFS的架构"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 HDFS的架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-HDFS写数据流程"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 HDFS写数据流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-HDFS读数据流程"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 HDFS读数据流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-HDFS中的JavaAPI"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 HDFS中的JavaAPI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-案例"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.5 案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-MapReduce分布式计算框架"><span class="nav-number">1.2.</span> <span class="nav-text">2. MapReduce分布式计算框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-InputFormat"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 InputFormat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-MapTask端的工作机制"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 MapTask端的工作机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-shuffle的过程"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 shuffle的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-ReduceTask端的工作机制"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 ReduceTask端的工作机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-OutputFormat"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 OutputFormat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-特殊的组件-partitioner"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 特殊的组件:partitioner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-特殊的组件-combine"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.7 特殊的组件:combine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-案例一-单词计数-WordCount"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.8 案例一:单词计数,WordCount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-案例二-手机上网流量统计-用MR进行排序-求出topN"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.9 案例二:手机上网流量统计,用MR进行排序,求出topN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-10-案例三-多表关联查询"><span class="nav-number">1.2.10.</span> <span class="nav-text">2.10 案例三:多表关联查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-11-案例四-社交粉丝数据分析-求两个人的共同好友"><span class="nav-number">1.2.11.</span> <span class="nav-text">2.11 案例四:社交粉丝数据分析,求两个人的共同好友</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Yarn分布式资源调度框架"><span class="nav-number">1.3.</span> <span class="nav-text">3. Yarn分布式资源调度框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-干什么的"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 干什么的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Yarn的工作流程"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Yarn的工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Yarn的调度器"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 Yarn的调度器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Yarn常用参数的配置"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 Yarn常用参数的配置</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hbase是什么"><span class="nav-number">1.</span> <span class="nav-text">1. Hbase是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Hbase中表的特征"><span class="nav-number">2.</span> <span class="nav-text">2. Hbase中表的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Hbase的集群结构"><span class="nav-number">3.</span> <span class="nav-text">3. Hbase的集群结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hbase-Shell"><span class="nav-number">4.</span> <span class="nav-text">4. Hbase Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Hbase的内部原理"><span class="nav-number">5.</span> <span class="nav-text">5. Hbase的内部原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Hbase的寻址机制"><span class="nav-number">6.</span> <span class="nav-text">6. Hbase的寻址机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-二级索引"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 二级索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-布隆过滤器"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 布隆过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Hbase的rowkey设计"><span class="nav-number">7.</span> <span class="nav-text">7. Hbase的rowkey设计</span></a></li></ol></div>
             
 
           </div>
