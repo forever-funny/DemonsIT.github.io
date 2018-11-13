@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据同步 导入导出,DataX,Sqoop,">
+  <meta name="keywords" content="消息队列,Kafka,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
-<meta name="keywords" content="大数据同步 导入导出,DataX,Sqoop">
+<meta name="description" content="1. Kafka是什么? 分布式的消息队列 实时性,高可用,负载均衡 不支持事务 高吞吐量-批量处理,顺序读写 分为生产者(push推数据)和消费者(pull拉数据)两个角色 区别于rabbitMQ和activeMQ等支持事务的传统消息队列  2. 消息队列的作用 解耦-模块中每个成员不必受其它成员影响,可以自力更生,只通过一个简单的容器互相联系 异步-针对不需要即时(同步)返回结果的操作 并行-">
+<meta name="keywords" content="消息队列,Kafka">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DataX VS Sqoop">
-<meta property="og:url" content="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/index.html">
+<meta property="og:title" content="Kafka学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/2018-11-13-Kafka学习笔记/index.html">
 <meta property="og:site_name" content="花驴">
-<meta property="og:description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
+<meta property="og:description" content="1. Kafka是什么? 分布式的消息队列 实时性,高可用,负载均衡 不支持事务 高吞吐量-批量处理,顺序读写 分为生产者(push推数据)和消费者(pull拉数据)两个角色 区别于rabbitMQ和activeMQ等支持事务的传统消息队列  2. 消息队列的作用 解耦-模块中每个成员不必受其它成员影响,可以自力更生,只通过一个简单的容器互相联系 异步-针对不需要即时(同步)返回结果的操作 并行-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-13T00:36:08.006Z">
+<meta property="og:updated_time" content="2018-11-13T03:52:30.803Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DataX VS Sqoop">
-<meta name="twitter:description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
+<meta name="twitter:title" content="Kafka学习笔记">
+<meta name="twitter:description" content="1. Kafka是什么? 分布式的消息队列 实时性,高可用,负载均衡 不支持事务 高吞吐量-批量处理,顺序读写 分为生产者(push推数据)和消费者(pull拉数据)两个角色 区别于rabbitMQ和activeMQ等支持事务的传统消息队列  2. 消息队列的作用 解耦-模块中每个成员不必受其它成员影响,可以自力更生,只通过一个简单的容器互相联系 异步-针对不需要即时(同步)返回结果的操作 并行-">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/13/2018-11-13-Kafka学习笔记/">
 
 
 
 
 
-  <title>DataX VS Sqoop | 花驴</title>
+  <title>Kafka学习笔记 | 花驴</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/2018-11-13-Kafka学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Long">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DataX VS Sqoop</h1>
+          <h1 class="post-title" itemprop="name headline">Kafka学习笔记</h1>
         
 
         <div class="post-meta">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T08:36:07+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T11:52:30+08:00">
                 2018-11-13
               </time>
             
@@ -349,7 +349,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-13T08:36:08+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-13T11:52:30+08:00">
                 2018-11-13
               </time>
             
@@ -385,7 +385,7 @@
 
           
           
-             <span id="/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/" class="leancloud_visitors" data-flag-title="DataX VS Sqoop">
+             <span id="/2018/11/13/2018-11-13-Kafka学习笔记/" class="leancloud_visitors" data-flag-title="Kafka学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  726 字
+                  1.2k 字
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  4 分钟
                 </span>
               
             </div>
@@ -447,23 +447,59 @@
       
 
       
-        <h1 id="大数据同步工具-DataX与Sqoop"><a href="#大数据同步工具-DataX与Sqoop" class="headerlink" title="大数据同步工具-DataX与Sqoop"></a>大数据同步工具-DataX与Sqoop</h1><h2 id="DataX"><a href="#DataX" class="headerlink" title="DataX"></a>DataX</h2><ul>
-<li>DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。</li>
+        <h2 id="1-Kafka是什么"><a href="#1-Kafka是什么" class="headerlink" title="1. Kafka是什么?"></a>1. Kafka是什么?</h2><ul>
+<li>分布式的消息队列</li>
+<li>实时性,高可用,负载均衡</li>
+<li>不支持事务</li>
+<li>高吞吐量-批量处理,顺序读写</li>
+<li>分为生产者(push推数据)和消费者(pull拉数据)两个角色</li>
+<li>区别于rabbitMQ和activeMQ等支持事务的传统消息队列</li>
 </ul>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Job: 一道数据同步作业</span><br><span class="line">Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.</span><br><span class="line">Sub-job： 数据同步作业切分后的小任务</span><br><span class="line"><span class="function"><span class="title">Reader</span><span class="params">(Loader)</span></span>: 数据读入模块，负责运行切分后的小任务，将数据从源头装载入DataX</span><br><span class="line">Storage: Reader和Writer通过Storage交换数据</span><br><span class="line"><span class="function"><span class="title">Writer</span><span class="params">(Dumper)</span></span>: 数据写出模块，负责将数据从DataX导入至目的数据地</span><br></pre></td></tr></table></figure>
+<h2 id="2-消息队列的作用"><a href="#2-消息队列的作用" class="headerlink" title="2. 消息队列的作用"></a>2. 消息队列的作用</h2><ul>
+<li>解耦-模块中每个成员不必受其它成员影响,可以自力更生,只通过一个简单的容器互相联系</li>
+<li>异步-针对不需要即时(同步)返回结果的操作</li>
+<li>并行-消息下达后多个模块可同时执行一个任务</li>
+<li>广播-只需要关心消息是否送达了队列，至于谁希望订阅，是下游的事情</li>
+<li>最终一致性-允许暂时的不一致,但是结果最终达到了想要的结果</li>
+<li>流量削峰与流控-只需要关心消息是否送达了队列，至于谁希望订阅，是下游的事情</li>
+<li>日志处理-将消息队列用在日志处理中，Kafka的应用就解决了大量日志传输的问题</li>
+</ul>
+<h2 id="3-Kafka的组件"><a href="#3-Kafka的组件" class="headerlink" title="3. Kafka的组件"></a>3. Kafka的组件</h2><ul>
+<li>Producer:消息的生产者</li>
+<li>Topic:生产的消息根据Topic分类</li>
+<li>Broker:每个kafka实例(一个节点/server)</li>
+<li>Consumer:消息的消费者</li>
+<li>Zookeeper:协调通讯,保存meta信息,后来的版本meta是由Topic保存</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Topic是一类消息的统称</span><br><span class="line">每个Topic中接收到的消息会被平均分成多个<span class="built_in">partition</span></span><br><span class="line">每个<span class="built_in">partition</span>对应保存在一个broker中,每个broker中保存着多个不同的<span class="built_in">partition</span>分区</span><br><span class="line">根据副本机制,每个<span class="built_in">partition</span>会有多个备份到其它broker,但是只有一个<span class="built_in">partition</span>是leader,其余备份的<span class="built_in">partition</span>都是follower</span><br><span class="line">每个<span class="built_in">partition</span>中包含多个segment,每个segment的大小默认是1GB,当其中存储的数据达到此值时会生成新的segment来保存数据,原来的1GB数据会被<span class="built_in">flush</span>到磁盘,只有<span class="built_in">flush</span>到磁盘的数据才能被消费者消费到</span><br><span class="line">每个segment包含两个文件:.<span class="built_in">log</span>(存储生产者发过来的消息数据,顺序读写)和.index(消息数据的索引)</span><br><span class="line">offset:消息偏移量,记录了消息被消费了多少,还有多少没被消费</span><br><span class="line"></span><br><span class="line">注:</span><br></pre></td></tr></table></figure>
+<h2 id="4-Kafka的命令行"><a href="#4-Kafka的命令行" class="headerlink" title="4. Kafka的命令行"></a>4. Kafka的命令行</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">创建<span class="selector-tag">topic</span></span><br><span class="line"><span class="selector-tag">kafka-topics</span><span class="selector-class">.sh</span> <span class="selector-tag">--create</span> <span class="selector-tag">--partitions</span> 3 <span class="selector-tag">--replication-factor</span> 2 <span class="selector-tag">--topic</span> <span class="selector-tag">kafkatopic</span> <span class="selector-tag">--zookeeper</span> <span class="selector-tag">node01</span><span class="selector-pseudo">:2181</span>,<span class="selector-tag">node02</span><span class="selector-pseudo">:2181</span>,<span class="selector-tag">node03</span><span class="selector-pseudo">:2181</span></span><br><span class="line"></span><br><span class="line">模拟生产者</span><br><span class="line"><span class="selector-tag">kafka-console-producer</span><span class="selector-class">.sh</span> <span class="selector-tag">--broker-list</span> <span class="selector-tag">node01</span><span class="selector-pseudo">:9092</span>,<span class="selector-tag">node02</span><span class="selector-pseudo">:9092</span>,<span class="selector-tag">node03</span><span class="selector-pseudo">:9092</span> <span class="selector-tag">--topic</span> <span class="selector-tag">kafkatopic</span></span><br><span class="line"></span><br><span class="line">模拟消费者</span><br><span class="line"><span class="selector-tag">kafka-console-consumer</span><span class="selector-class">.sh</span> <span class="selector-tag">--from-beginning</span> <span class="selector-tag">--topic</span> <span class="selector-tag">kafkatopic</span> <span class="selector-tag">--zookeeper</span> <span class="selector-tag">node01</span><span class="selector-pseudo">:2181</span>,<span class="selector-tag">node02</span><span class="selector-pseudo">:2181</span>,<span class="selector-tag">node03</span><span class="selector-pseudo">:2181</span></span><br></pre></td></tr></table></figure>
+<h2 id="5-Kafka的分区策略"><a href="#5-Kafka的分区策略" class="headerlink" title="5. Kafka的分区策略"></a>5. Kafka的分区策略</h2><ul>
+<li>第一种:若指定了分区号,则直接将数据发送到指定的分区</li>
+<li>第二种:若没有指定分区号,但是给定了数据的key值,则通过key值取hashCode进行分区</li>
+<li>第三种:既没有指定分区号,也没有给定数据的key值,则采用轮询机制进行自动分区</li>
+<li>第四种:自定义分区<ul>
+<li>第一种方式:直接指定分区</li>
+<li>第二种方式:实现Partitioner接口</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-Kafka集群的负载均衡"><a href="#6-Kafka集群的负载均衡" class="headerlink" title="6. Kafka集群的负载均衡"></a>6. Kafka集群的负载均衡</h2><ul>
+<li>一个partition在同一时间只能被一个消费者消费,一个消费者同一时间可以消费多个partition</li>
+<li>因此,如果设置的partition数量小于consumer的数量,会导致有空闲的consumer</li>
+<li>故partition的数量一定要大于或等于consumer的数量</li>
+<li>另一方面:partition的数量一定要大于broker的数量,这样leader partition就会均匀的分布在各个broker中,实现负载均衡</li>
+</ul>
+<h2 id="7-Kafka如何保证数据的不丢失"><a href="#7-Kafka如何保证数据的不丢失" class="headerlink" title="7. Kafka如何保证数据的不丢失?"></a>7. Kafka如何保证数据的不丢失?</h2><ul>
+<li>生产者如何保证数据的不丢失</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">kafka的ack机制：在kafka发送数据的时候，每次发送消息都会有一个确认反馈机制，确保消息正常的能够被收到</span><br><span class="line">如果是同步模式：ack机制能够保证数据的不丢失，如果ack设置为<span class="number">0</span>，风险很大，一般不建议设置为<span class="number">0</span></span><br><span class="line">producer.type=sync </span><br><span class="line">request<span class="selector-class">.required</span><span class="selector-class">.acks</span>=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">如果是异步模式：通过buffer来进行控制数据的发送，有两个值来进行控制，时间阈值与消息的数量阈值，如果buffer满了数据还没有发送出去，如果设置的是立即清理模式，风险很大，一定要设置为阻塞模式</span><br><span class="line">结论：producer有丢数据的可能，但是可以通过配置保证消息的不丢失</span><br><span class="line">producer.type=async </span><br><span class="line">request<span class="selector-class">.required</span><span class="selector-class">.acks</span>=<span class="number">1</span> </span><br><span class="line">queue<span class="selector-class">.buffering</span><span class="selector-class">.max</span><span class="selector-class">.ms</span>=<span class="number">5000</span> </span><br><span class="line">queue<span class="selector-class">.buffering</span><span class="selector-class">.max</span><span class="selector-class">.messages</span>=<span class="number">10000</span> </span><br><span class="line">queue<span class="selector-class">.enqueue</span><span class="selector-class">.timeout</span><span class="selector-class">.ms</span> = -<span class="number">1</span> </span><br><span class="line">batch<span class="selector-class">.num</span><span class="selector-class">.messages</span>=<span class="number">200</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>DataX直接在运行DataX的机器上进行数据的抽取及加载(单节点运行)</li>
+<li>消费者如何保证数据的不丢失</li>
 </ul>
-<h2 id="Sqoop"><a href="#Sqoop" class="headerlink" title="Sqoop"></a>Sqoop</h2><ul>
-<li>Sqoop是一个用来将Hadoop和关系型数据库中的数据相互转移的工具，可以将一个关系型数据库(例如<br>： MySQL ,Oracle ,Postgres等)中的数据导进到Hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。</li>
-</ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Sqoop</span>充分利用了<span class="built_in">map</span>-<span class="built_in">reduce</span>的计算框架。<span class="type">Sqoop</span>根据输入条件，生成一个<span class="built_in">map</span>-<span class="built_in">reduce</span>的作业，在<span class="type">Hadoop</span>的框架中运行。</span><br><span class="line">从理论上讲，用<span class="built_in">map</span>-<span class="built_in">reduce</span>框架同时在多个节点上进行<span class="keyword">import</span>应该会比从单节点上运行多个并行导入效率高。而实际的测试中也是如此，测试一个Oracle to hdfs的作业，DataX上只能看到运行DataX上的机器的数据库连接，而Sqoop运行时，4台task-tracker全部产生一个数据库连接。调起的Sqoop作业的机器也会产生一个数据库连接，应为需要读取数据表的一些元数据信息，数据量等，做分区。</span><br><span class="line"><span class="type">Sqoop</span>现在作为<span class="type">Apache</span>的顶级项目，如果要我从<span class="type">DataX</span>和<span class="type">Sqoop</span>中间选择的话，我想我还是会选择<span class="type">Sqoop</span>。而且<span class="type">Sqoop</span>还有很多第三方的插件。早上使用了<span class="type">Quest</span>开发的<span class="type">OraOop</span>插件，确实像quest说的一样，速度有着大幅的提升，<span class="type">Quest</span>在数据库方面的经验，确实比旁人深厚。</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Sqoop的命令使用:</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看帮助</span></span><br><span class="line">bin/sqoop list-databases --help</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">列出主机上所有的数据库</span></span><br><span class="line">bin/sqoop list-databases --connect jdbc:mysql://192.168.106.100:3306/ --username root --password 123456</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看某一个数据库中所有的表</span></span><br><span class="line">bin/sqoop list-databases --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">导入数据库表到HDFS</span></span><br><span class="line">bin/sqoop import --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456 --table tableName --m 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">导入数据到HDFS指定的目录</span></span><br><span class="line">bin/sqoop import  --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456 --delete-target-dir --table emp  --target-dir /sqoop/emp --m 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">HDFS导出到MySQL</span></span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://192.168.106.100:3306/userdb \</span><br><span class="line">--username root --password 123456 \</span><br><span class="line">--table tableName \</span><br><span class="line">--export-dir /sqoop/emp \</span><br><span class="line">--input-fields-terminated-by ","</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Sqoop支持数据的增量导入和全量导入—import</li>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过<span class="built_in">offset</span>  commit  来保证数据的不丢失，kafka自己记录了每次消费的<span class="built_in">offset</span>数值，下次继续消费的时候，接着上次的<span class="built_in">offset</span>进行消费即可</span><br></pre></td></tr></table></figure>
+<h2 id="8-Kafka为什么这么快"><a href="#8-Kafka为什么这么快" class="headerlink" title="8. Kafka为什么这么快?"></a>8. Kafka为什么这么快?</h2><ul>
+<li>顺序读写</li>
+<li>页缓存</li>
 </ul>
 
       
@@ -494,17 +530,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/大数据同步-导入导出/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/消息队列/" rel="tag"><i class="fa fa-tag"></i>
 
- 大数据同步 导入导出</a>
+ 消息队列</a>
           
-            <a href="/tags/DataX/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/Kafka/" rel="tag"><i class="fa fa-tag"></i>
 
- DataX</a>
-          
-            <a href="/tags/Sqoop/" rel="tag"><i class="fa fa-tag"></i>
-
- Sqoop</a>
+ Kafka</a>
           
         </div>
       
@@ -517,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/12/2018-11-12-Hbase学习笔记/" rel="next" title="Hbase学习笔记">
-                <i class="fa fa-chevron-left"></i> Hbase学习笔记
+              <a href="/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/" rel="next" title="DataX VS Sqoop">
+                <i class="fa fa-chevron-left"></i> DataX VS Sqoop
               </a>
             
           </div>
@@ -526,10 +558,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/13/2018-11-13-Kafka学习笔记/" rel="prev" title="Kafka学习笔记">
-                Kafka学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -678,7 +706,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据同步工具-DataX与Sqoop"><span class="nav-number">1.</span> <span class="nav-text">大数据同步工具-DataX与Sqoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataX"><span class="nav-number">1.1.</span> <span class="nav-text">DataX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqoop"><span class="nav-number">1.2.</span> <span class="nav-text">Sqoop</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Kafka是什么"><span class="nav-number">1.</span> <span class="nav-text">1. Kafka是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-消息队列的作用"><span class="nav-number">2.</span> <span class="nav-text">2. 消息队列的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Kafka的组件"><span class="nav-number">3.</span> <span class="nav-text">3. Kafka的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Kafka的命令行"><span class="nav-number">4.</span> <span class="nav-text">4. Kafka的命令行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Kafka的分区策略"><span class="nav-number">5.</span> <span class="nav-text">5. Kafka的分区策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Kafka集群的负载均衡"><span class="nav-number">6.</span> <span class="nav-text">6. Kafka集群的负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Kafka如何保证数据的不丢失"><span class="nav-number">7.</span> <span class="nav-text">7. Kafka如何保证数据的不丢失?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Kafka为什么这么快"><span class="nav-number">8.</span> <span class="nav-text">8. Kafka为什么这么快?</span></a></li></ol></div>
             
 
           </div>
