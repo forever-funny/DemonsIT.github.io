@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="整合 共生,Spark Hive SQL Yarn,">
+  <meta name="keywords" content="大数据同步 导入导出,DataX,Sqoop,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
-<meta name="keywords" content="整合 共生,Spark Hive SQL Yarn">
+<meta name="description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
+<meta name="keywords" content="大数据同步 导入导出,DataX,Sqoop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spark与其它平台的整合">
-<meta property="og:url" content="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/index.html">
+<meta property="og:title" content="DataX VS Sqoop">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/index.html">
 <meta property="og:site_name" content="花驴">
-<meta property="og:description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
+<meta property="og:description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T16:28:45.551Z">
+<meta property="og:updated_time" content="2018-11-13T00:36:08.006Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spark与其它平台的整合">
-<meta name="twitter:description" content="Hive On Spark1234Hive是Hadoop标准的最早的SQL查询引擎.我们使用Hive的查询语句,但在底层运行的是Spark Job所有的Hive的优势得以保留,缺点得以弥补Hive SQL比SparkSQL好用且支持更丰富的功能 SparkSQL On Hive(常用)12它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一">
+<meta name="twitter:title" content="DataX VS Sqoop">
+<meta name="twitter:description" content="大数据同步工具-DataX与SqoopDataX DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。  123456Job: 一道数据同步作业Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.Sub-job： 数据同步作业切分后的小任务">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/">
 
 
 
 
 
-  <title>Spark与其它平台的整合 | 花驴</title>
+  <title>DataX VS Sqoop | 花驴</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/2018-11-11-Spark与其它平台的整合/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Long">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spark与其它平台的整合</h1>
+          <h1 class="post-title" itemprop="name headline">DataX VS Sqoop</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-12T00:28:45+08:00">
-                2018-11-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T08:36:07+08:00">
+                2018-11-13
               </time>
             
 
@@ -349,8 +349,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-12T00:28:45+08:00">
-                2018-11-12
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-13T08:36:08+08:00">
+                2018-11-13
               </time>
             
           </span>
@@ -385,7 +385,7 @@
 
           
           
-             <span id="/2018/11/12/2018-11-11-Spark与其它平台的整合/" class="leancloud_visitors" data-flag-title="Spark与其它平台的整合">
+             <span id="/2018/11/13/2018-11-13-大数据同步工具-DataX与Sqoop/" class="leancloud_visitors" data-flag-title="DataX VS Sqoop">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  320 字
+                  726 字
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -447,9 +447,25 @@
       
 
       
-        <h2 id="Hive-On-Spark"><a href="#Hive-On-Spark" class="headerlink" title="Hive On Spark"></a>Hive On Spark</h2><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hive是Hadoop标准的最早的SQL查询引擎.</span><br><span class="line">我们使用Hive的查询语句,但在底层运行的是Spark <span class="keyword">Job</span></span><br><span class="line">所有的Hive的优势得以保留,缺点得以弥补</span><br><span class="line">Hive SQL比SparkSQL好用且支持更丰富的功能</span><br></pre></td></tr></table></figure>
-<h2 id="SparkSQL-On-Hive-常用"><a href="#SparkSQL-On-Hive-常用" class="headerlink" title="SparkSQL On Hive(常用)"></a>SparkSQL On Hive(常用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">它是将sparksql与hive进行整合,先获取hive表的元数据,可以获取得到当前有哪些hive表,以及每一个hiv表中有哪些字段,还有每一个hive表的数据的存放目录,后期不再使用hivesql底层运行MR,而是改成了spark任务来提升速度</span><br><span class="line">它默认使用Hive的元数据来管理它的元数据</span><br></pre></td></tr></table></figure>
-<h2 id="Spark-On-Yarn-常用"><a href="#Spark-On-Yarn-常用" class="headerlink" title="Spark On Yarn(常用)"></a>Spark On Yarn(常用)</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">是把Spark的任务提交到Yarn中去运行,由Yarn中的老大ResourceManager去分配资源和负责调度</span><br><span class="line">有两种模式:</span><br><span class="line">Cluster模式:</span><br><span class="line">	集群模式,即Driver运行在ResourceManager上,任务需要的数据提交到RM上去运行并得到最终的结果,客户端提交任务以后挂掉不影响任务的执行和结果的生成</span><br><span class="line"></span><br><span class="line"><span class="built_in">Client</span>模式:</span><br><span class="line">	客户端模式,即Driver运行在<span class="built_in">Client</span>上,任务需要的数据在<span class="built_in">Client</span>和Yarn之间来回流动,需要Spark客户端和Yarn时刻保持通讯,否则无法得到结果</span><br></pre></td></tr></table></figure>
+        <h1 id="大数据同步工具-DataX与Sqoop"><a href="#大数据同步工具-DataX与Sqoop" class="headerlink" title="大数据同步工具-DataX与Sqoop"></a>大数据同步工具-DataX与Sqoop</h1><h2 id="DataX"><a href="#DataX" class="headerlink" title="DataX"></a>DataX</h2><ul>
+<li>DataX是一个在异构的数据库/文件系统之间高速交换数据的工具,实现了在任意的数据处理系统(RDBMS/Hdfs/Local filesystem)之间的数据交换，由淘宝数据平台部门完成。</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Job: 一道数据同步作业</span><br><span class="line">Splitter: 作业切分模块，将一个大任务与分解成多个可以并发的小任务.</span><br><span class="line">Sub-job： 数据同步作业切分后的小任务</span><br><span class="line"><span class="function"><span class="title">Reader</span><span class="params">(Loader)</span></span>: 数据读入模块，负责运行切分后的小任务，将数据从源头装载入DataX</span><br><span class="line">Storage: Reader和Writer通过Storage交换数据</span><br><span class="line"><span class="function"><span class="title">Writer</span><span class="params">(Dumper)</span></span>: 数据写出模块，负责将数据从DataX导入至目的数据地</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DataX直接在运行DataX的机器上进行数据的抽取及加载(单节点运行)</li>
+</ul>
+<h2 id="Sqoop"><a href="#Sqoop" class="headerlink" title="Sqoop"></a>Sqoop</h2><ul>
+<li>Sqoop是一个用来将Hadoop和关系型数据库中的数据相互转移的工具，可以将一个关系型数据库(例如<br>： MySQL ,Oracle ,Postgres等)中的数据导进到Hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Sqoop</span>充分利用了<span class="built_in">map</span>-<span class="built_in">reduce</span>的计算框架。<span class="type">Sqoop</span>根据输入条件，生成一个<span class="built_in">map</span>-<span class="built_in">reduce</span>的作业，在<span class="type">Hadoop</span>的框架中运行。</span><br><span class="line">从理论上讲，用<span class="built_in">map</span>-<span class="built_in">reduce</span>框架同时在多个节点上进行<span class="keyword">import</span>应该会比从单节点上运行多个并行导入效率高。而实际的测试中也是如此，测试一个Oracle to hdfs的作业，DataX上只能看到运行DataX上的机器的数据库连接，而Sqoop运行时，4台task-tracker全部产生一个数据库连接。调起的Sqoop作业的机器也会产生一个数据库连接，应为需要读取数据表的一些元数据信息，数据量等，做分区。</span><br><span class="line"><span class="type">Sqoop</span>现在作为<span class="type">Apache</span>的顶级项目，如果要我从<span class="type">DataX</span>和<span class="type">Sqoop</span>中间选择的话，我想我还是会选择<span class="type">Sqoop</span>。而且<span class="type">Sqoop</span>还有很多第三方的插件。早上使用了<span class="type">Quest</span>开发的<span class="type">OraOop</span>插件，确实像quest说的一样，速度有着大幅的提升，<span class="type">Quest</span>在数据库方面的经验，确实比旁人深厚。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sqoop的命令使用:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看帮助</span></span><br><span class="line">bin/sqoop list-databases --help</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">列出主机上所有的数据库</span></span><br><span class="line">bin/sqoop list-databases --connect jdbc:mysql://192.168.106.100:3306/ --username root --password 123456</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看某一个数据库中所有的表</span></span><br><span class="line">bin/sqoop list-databases --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">导入数据库表到HDFS</span></span><br><span class="line">bin/sqoop import --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456 --table tableName --m 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">导入数据到HDFS指定的目录</span></span><br><span class="line">bin/sqoop import  --connect jdbc:mysql://192.168.106.100:3306/userdb --username root --password 123456 --delete-target-dir --table emp  --target-dir /sqoop/emp --m 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">HDFS导出到MySQL</span></span><br><span class="line">bin/sqoop export \</span><br><span class="line">--connect jdbc:mysql://192.168.106.100:3306/userdb \</span><br><span class="line">--username root --password 123456 \</span><br><span class="line">--table tableName \</span><br><span class="line">--export-dir /sqoop/emp \</span><br><span class="line">--input-fields-terminated-by ","</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sqoop支持数据的增量导入和全量导入—import</li>
+</ul>
+
       
     </div>
     
@@ -478,13 +494,17 @@
       
         <div class="post-tags">
           
-            <a href="/tags/整合-共生/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/大数据同步-导入导出/" rel="tag"><i class="fa fa-tag"></i>
 
- 整合 共生</a>
+ 大数据同步 导入导出</a>
           
-            <a href="/tags/Spark-Hive-SQL-Yarn/" rel="tag"><i class="fa fa-tag"></i>
+            <a href="/tags/DataX/" rel="tag"><i class="fa fa-tag"></i>
 
- Spark Hive SQL Yarn</a>
+ DataX</a>
+          
+            <a href="/tags/Sqoop/" rel="tag"><i class="fa fa-tag"></i>
+
+ Sqoop</a>
           
         </div>
       
@@ -497,8 +517,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/11/2018-11-10-Flume补充知识点/" rel="next" title="Flume拾遗">
-                <i class="fa fa-chevron-left"></i> Flume拾遗
+              <a href="/2018/11/12/2018-11-12-Hbase学习笔记/" rel="next" title="Hbase学习笔记">
+                <i class="fa fa-chevron-left"></i> Hbase学习笔记
               </a>
             
           </div>
@@ -506,10 +526,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/12/2018-11-12-Hbase学习笔记/" rel="prev" title="Hbase学习笔记">
-                Hbase学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -658,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hive-On-Spark"><span class="nav-number">1.</span> <span class="nav-text">Hive On Spark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SparkSQL-On-Hive-常用"><span class="nav-number">2.</span> <span class="nav-text">SparkSQL On Hive(常用)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spark-On-Yarn-常用"><span class="nav-number">3.</span> <span class="nav-text">Spark On Yarn(常用)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#大数据同步工具-DataX与Sqoop"><span class="nav-number">1.</span> <span class="nav-text">大数据同步工具-DataX与Sqoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataX"><span class="nav-number">1.1.</span> <span class="nav-text">DataX</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqoop"><span class="nav-number">1.2.</span> <span class="nav-text">Sqoop</span></a></li></ol></li></ol></div>
             
 
           </div>
